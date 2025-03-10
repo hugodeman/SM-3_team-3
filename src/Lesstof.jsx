@@ -13,6 +13,8 @@ function Les() {
         setOpenDropdown((prev) => (prev === index ? null : index));
     };
 
+    function Lesson(){
+
     return (
         <>
             <div>
@@ -58,4 +60,4 @@ function Les() {
     );
 }
 
-export default Les;
+export default Lesson

@@ -1,8 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from "./components/navbar-mobile.jsx";
 
 function Vingerspelmenu() {
+    const navigate = useNavigate();
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+    const handleLearnClick = () => {
+        navigate('/vingerspel/oefening');
+    };
 
     return (
         <div>
@@ -11,7 +17,10 @@ function Vingerspelmenu() {
                 <p className="text-base my-2 ml-[5%]">Leer hier alle letters in Nederlandse Gebarentaal</p>
                 <div className="flex justify-center mt-[10%]">
                     <button
-                        className="w-72 px-4 py-3 text-2xl font-bold cursor-pointer bg-[#CF0245] text-white rounded-lg">Leren
+                        onClick={handleLearnClick}
+                        className="w-72 px-4 py-3 text-2xl font-bold cursor-pointer bg-[#CF0245] text-white rounded-lg"
+                    >
+                        Leren
                     </button>
                 </div>
                 <div className="flex justify-center mt-8">
@@ -25,7 +34,7 @@ function Vingerspelmenu() {
                     </div>
                 </div>
             </div>
-            <Navbar/>
+            <Navbar />
         </div>
     );
 }
