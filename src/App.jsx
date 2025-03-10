@@ -1,23 +1,37 @@
-import {createBrowserRouter, RouterProvider} from 'react-router';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout.jsx";
-import Lesstof from "./Lesstof.jsx";
+import Vingerspelmenu from "./Vingerspelmenu.jsx";
+import Home from "./Home.jsx"; // Optioneel, een aparte Home component
+import Navbar from "./components/navbar-mobile.jsx";
 
-function App() {
-    const router = createBrowserRouter([{
+const router = createBrowserRouter([
+    {
         element: <Layout />,
         children: [
+            {
+                path: "/",
+                element: <Home />
+            },
+            {
+                path: "/vingerspel",
+                element: <Vingerspelmenu />
+            },
             {
                 path: '/lesstof',
                 element: <Lesstof/>
             }
         ]
-    }]);
+    }
+]);
 
-    return(
-        <>
-            <RouterProvider router={router}/>
-        </>
-    );
+
+function App() {
+  return (
+    <>
+        <Navbar />
+        <RouterProvider router={router} />;
+    </>
+  )
 }
 
-export default App
+export default App;

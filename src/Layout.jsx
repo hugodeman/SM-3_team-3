@@ -1,13 +1,15 @@
-import {Link, Outlet} from "react-router";
+import { Link, Outlet } from "react-router-dom";
 
-function Layout(){
+function Layout() {
     return (
-        <>
-            <main className="container mx-auto px-6 py-6">
-                <Outlet/>
-            </main>
-        </>
-    )
+        <div>
+            <nav>
+                <Link to="/">Home</Link>
+                <Link to="/vingerspel">Vingerspel</Link>
+            </nav>
+            <Outlet />
+        </div>
+    );
 }
 
 export default Layout;
