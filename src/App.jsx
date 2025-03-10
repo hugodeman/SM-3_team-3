@@ -8,6 +8,7 @@ import Vingerspelnieuweletter from "./components/vingerspelnieuweletter.jsx";
 import Vingerspelherhaling from "./components/vingerspelherhaling.jsx";
 import Vingerspelcontrole from "./components/vingerspelcontrole.jsx";
 import Les1 from "./lessen/Les1.jsx";
+import Pauzemenu from "./components/pauzemenu.jsx";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: "/les1",
                 element: <Les1/>
+            },
+            {
+                path: "/pauze",
+                element: <Pauzemenu />
             }
         ]
     }
