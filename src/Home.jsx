@@ -1,7 +1,12 @@
+import Navbar from "./components/navbar-mobile.jsx";
+
 function Home() {
     return (
-        <div>Dit is de home pagina</div>
-    )
+        <div>
+            <div>Dit is de home pagina</div>
+            <Navbar />
+        </div>
+    );
 }
 
 export default Home;
