@@ -4,6 +4,7 @@ import Vingerspelmenu from "./Vingerspelmenu.jsx";
 import Home from "./Home.jsx"; // Optioneel, een aparte Home component
 import Navbar from "./components/navbar-mobile.jsx";
 import Lesstof from "./Lesstof.jsx";
+import Vingerspelnieuweletter from "./vingerspelnieuweletter.jsx";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
                 element: <Vingerspelmenu />
             },
             {
+                path: "/vingerspel/oefening",
+                element: <Vingerspelnieuweletter />
+            },
+            {
                 path: '/lesstof',
                 element: <Lesstof/>
             }
@@ -29,7 +34,6 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-        <Navbar />
         <RouterProvider router={router} />;
     </>
   )

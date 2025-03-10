@@ -1,12 +1,14 @@
 import React from 'react';
+import Navbar from "./components/navbar-mobile.jsx";
 
 function Vingerspelmenu() {
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
     return (
+        <div>
         <div className="p-9 text-left">
             <h1 className="text-3xl font-bold my-2 ml-[5%]">Vingerspel</h1>
-            <p className="text-base my-2 ml-[5%]">Leer hier alle letters in gebarentaal</p>
+            <p className="text-base my-2 ml-[5%]">Leer hier alle letters in Nederlandse Gebarentaal</p>
             <div className="flex justify-center mt-[10%]">
                 <button className="w-72 px-4 py-3 text-2xl font-bold cursor-pointer bg-[#CF0245] text-white rounded-lg">Leren</button>
             </div>
@@ -20,6 +22,8 @@ function Vingerspelmenu() {
                     ))}
                 </div>
             </div>
+        </div>
+        <Navbar />
         </div>
     );
 }
