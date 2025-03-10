@@ -38,7 +38,7 @@ const router = createBrowserRouter([
                 element: <Lesstof/>
             },
             {
-                path: "les1",
+                path: "/les1",
                 element: <Les1/>
             }
         ]
