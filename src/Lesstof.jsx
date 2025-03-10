@@ -13,11 +13,12 @@ function Les() {
             </div>
             <div className="pb-10 mb-10">
                 {/* Map through weeks and render buttons in pairs */}
-                {Array.from({ length: weeks.length / 2 }).map((_, i) => (
+                {Array.from({length: weeks.length / 2}).map((_, i) => (
                     <div key={i} className="flex justify-around mb-6">
                         {weeks.slice(i * 2, i * 2 + 2).map((week, j) => (
                             <div key={j}>
-                                <button className="bg-[#A90D3D] py-4 px-10 text-white rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl">
+                                <button
+                                    className="bg-[#A90D3D] py-4 px-10 text-white rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl">
                                     {week}
                                 </button>
                             </div>
@@ -25,7 +26,7 @@ function Les() {
                     </div>
                 ))}
             </div>
-            <NavbarMobile />
+            <NavbarMobile/>
         </>
     );
 }
