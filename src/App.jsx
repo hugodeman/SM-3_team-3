@@ -6,6 +6,7 @@ import Navbar from "./components/navbar-mobile.jsx";
 import Lesstof from "./Lesstof.jsx";
 import Vingerspelnieuweletter from "./components/vingerspelnieuweletter.jsx";
 import Vingerspelherhaling from "./components/vingerspelherhaling.jsx";
+import Vingerspelcontrole from "./components/vingerspelcontrole.jsx";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "/vingerspel/herhaling",
                 element: <Vingerspelherhaling />
+            },
+            {
+                path: "/vingerspel/controle",
+                element: <Vingerspelcontrole />
             },
             {
                 path: '/lesstof',

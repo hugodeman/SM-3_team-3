@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function vingerspelherhaling(){
+function vingerspelherhaling() {
+    const navigate = useNavigate();
+
+    const handleShowAnswerClick = () => {
+        navigate('/vingerspel/controle');
+    };
+
     return (
         <div className="mt-10">
             <h1 className="text-3xl font-bold my-2 ml-[5%]">Herhaling</h1>
@@ -13,11 +20,13 @@ function vingerspelherhaling(){
 
             <div className="flex justify-center mt-[10%]">
                 <button
-                    className="w-72 px-4 py-3 text-2xl font-bold cursor-pointer bg-[#CF0245] text-white rounded-lg">Laat antwoord zien
+                    onClick={handleShowAnswerClick}
+                    className="w-72 px-4 py-3 text-2xl font-bold cursor-pointer bg-[#CF0245] text-white rounded-lg">
+                    Laat antwoord zien
                 </button>
             </div>
         </div>
-    )
+    );
 }
 
 export default vingerspelherhaling;
