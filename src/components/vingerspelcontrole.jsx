@@ -4,7 +4,7 @@ function vingerspelcontrole() {
 
     return (
         <div className="mt-10">
-            <h1 className="text-3xl font-bold my-2 ml-[5%]">Controleren</h1>
+            <h1 className="text-3xl font-bold my-2 ml-[5%]">Controleren: a</h1>
             <p className="text-base my-2 ml-[5%]">Zie het gebaar hieronder. Ging het goed?</p>
 
             <div
@@ -14,7 +14,7 @@ function vingerspelcontrole() {
             <div className="flex justify-center mt-[10%] space-x-8">
                 <button
                     className="w-24 h-24 text-4xl font-bold cursor-pointer bg-red-500 text-white rounded-full flex items-center justify-center">
-                    <span className="text-white">x</span>
+                    <span className="text-white">✗</span>
                 </button>
                 <button
                     className="w-24 h-24 text-4xl font-bold cursor-pointer bg-green-500 text-white rounded-full flex items-center justify-center">
