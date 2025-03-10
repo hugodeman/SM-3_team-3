@@ -16,7 +16,6 @@ function Vingerspelmenu() {
                         <div key={letter}
                              className="flex flex-col items-center justify-center w-20 h-24 border-2 border-[#CF0245] bg-white rounded-lg font-bold text-2xl pb-3">
                             {letter}
-                            <div className="w-3/4 h-2 bg-[#D9D9D9] mt-[20%] rounded"></div>
                         </div>
                     ))}
                 </div>
