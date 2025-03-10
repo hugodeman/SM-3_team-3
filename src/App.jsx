@@ -1,8 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import Vingerspelmenu from "./Vingerspelmenu.jsx";
-import Home from "./Home.jsx"; // Optioneel, een aparte Home component
-import Navbar from "./components/navbar-mobile.jsx";
+import Home from "./Home.jsx";
 import Lesstof from "./Lesstof.jsx";
 import Vingerspelnieuweletter from "./vingerspelnieuweletter.jsx";
 
