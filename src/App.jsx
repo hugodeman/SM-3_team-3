@@ -4,7 +4,8 @@ import Vingerspelmenu from "./Vingerspelmenu.jsx";
 import Home from "./Home.jsx"; // Optioneel, een aparte Home component
 import Navbar from "./components/navbar-mobile.jsx";
 import Lesstof from "./Lesstof.jsx";
-import Vingerspelnieuweletter from "./vingerspelnieuweletter.jsx";
+import Vingerspelnieuweletter from "./components/vingerspelnieuweletter.jsx";
+import Vingerspelherhaling from "./components/vingerspelherhaling.jsx";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "/vingerspel/oefening",
                 element: <Vingerspelnieuweletter />
+            },
+            {
+                path: "/vingerspel/herhaling",
+                element: <Vingerspelherhaling />
             },
             {
                 path: '/lesstof',
