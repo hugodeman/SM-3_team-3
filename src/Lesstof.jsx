@@ -1,4 +1,4 @@
-function Les(){
+function Lessen(){
 
     return(
         <>
@@ -43,4 +43,4 @@ function Les(){
     )
 }
 
-export default Les
+export default Lessen
