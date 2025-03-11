@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavbarMobile from "./components/navbar-mobile.jsx";
 
 function MainPage() {
+    // Dark mode state ophalen uit localStorage
+    const [darkMode, setDarkMode] = useState(() => {
+        return localStorage.getItem("darkMode") === "true";
+    });
+
+    // Effect: pas de dark mode toe als deze actief is
+    useEffect(() => {
+        if (darkMode) {
+            document.body.classList.add("dark");
+        } else {
+            document.body.classList.remove("dark");
+        }
+        localStorage.setItem("darkMode", darkMode);
+    }, [darkMode]);
+
     return (
-        <div className="bg-[#F8F2E9] min-h-screen flex flex-col justify-between pb-24">
+        <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black min-h-screen flex flex-col justify-between pb-24"}>
             {/* Welkomsttekst */}
             <div className="p-6 relative">
-                <h1 className="text-3xl font-bold text-black">Welkom Jan</h1>
-                <p className="text-lg text-black mt-2 max-w-xs">
+                <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom Jan</h1>
+                <p className={`text-lg mt-2 max-w-xs ${darkMode ? 'text-gray-300' : 'text-black'}`}>
                     Alles wat je nodig hebt voor jouw Nederlandse gebarentaalavontuur, op één plek.
                     Leer vingerspellen, bouw zinnen en volg je vooruitgang met onze interactieve lesstof.
                 </p>
