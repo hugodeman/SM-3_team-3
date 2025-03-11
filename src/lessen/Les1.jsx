@@ -50,8 +50,8 @@ function Les1 () {
                         <Buttons text="Oefen" to="/opdracht3"/>
                     </div>
                 </div>
-                <Navbar />
             </div>
+            <Navbar />
         </>
     )
 }
