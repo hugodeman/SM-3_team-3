@@ -5,12 +5,12 @@ const Buttons = ({ text, to }) => {
         <div>
             {to ? (
                 <Link to={to}>
-                    <button className="bg-[#A90D3D] py-4 px-10 font-bold text-white rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl w-96">
+                    <button className="bg-[#A90D3D] py-4 px-10 font-bold text-white rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl w-full">
                         {text}
                     </button>
                 </Link>
             ) : (
-                <button className="bg-[#A90D3D] py-2.5 px-8 text-white font-bold rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl rounded-br-2xl">
+                <button className="bg-[#d6144f] py-2.5 px-8 text-white font-bold rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl rounded-br-2xl w-32">
                     {text}
                 </button>
             )}
