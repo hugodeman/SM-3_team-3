@@ -46,12 +46,26 @@ function Les1 () {
                     <div>
                         <p className={'text-lg py-4'}>oefen zinnen</p>
                     </div>
-                    <div className={'pb-20'}>
+                    <div className={'pb-5'}>
                         <Buttons text="Oefen" to="/opdracht3"/>
                     </div>
                 </div>
+
+                <div className={'border-t border-black pt-5'}>
+                    <h2 className={'font-bold text-xl pb-5'}>Toets de oefeningen</h2>
+                    <div className={'flex justify-between items-center'}>
+                        <h3 className={'text-lg mr-10 font-bold'}></h3>
+                        <Buttons text="0/10"/>
+                    </div>
+                    <div>
+                        <p className={'text-lg py-4'}>toets </p>
+                    </div>
+                    <div className={'pb-5 mb-20'}>
+                        <Buttons text="Oefen" to="/opdracht1"/>
+                    </div>
+                </div>
             </div>
-            <Navbar />
+            <Navbar/>
         </>
     )
 }
