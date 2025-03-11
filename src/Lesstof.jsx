@@ -16,7 +16,7 @@ function Lessons() {
     return (
         <>
             <div>
-                <h1 className="text-3xl font-bold mb-10 ml-8">Les stof</h1>
+                <h1 className="text-3xl font-bold mb-10 ml-8">Lesstof</h1>
             </div>
             <div className="pb-10 mb-10">
                 {Array.from({length: weeks.length / 2}).map((_, i) => (
