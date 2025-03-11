@@ -10,7 +10,7 @@ function Vingerspelmenu() {
     const [selectedLetter, setSelectedLetter] = useState(null);
 
     const handleLearnClick = () => {
-        navigate('/vingerspel/oefening');
+        navigate('/vingerspel/nieuweletter/a');
     };
 
     const handleLetterClick = (letter) => {
