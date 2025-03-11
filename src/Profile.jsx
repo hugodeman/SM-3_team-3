@@ -9,11 +9,14 @@ import trofee_4 from "../src/assets/Trophy/Trophy-4.png";
 import trofee_5 from "../src/assets/Trophy/Trophy-5.png";
 import trofee_6 from "../src/assets/Trophy/Trophy-6.png";
 import Navbar from "./components/navbar-mobile.jsx";
+import Hrlogo from "./components/hrlogo.jsx";
 
 const trofeeën = [trofee_0, trofee_1, trofee_2, trofee_3, trofee_4, trofee_5, trofee_6];
 
 function Profile() {
     return (
+        <div>
+            <Hrlogo />
         <section id="profile-container" className="p-4">
             <h1 className="text-2xl font-bold">Profile</h1>
             <h2 className="text-lg">Welkom gebruiker</h2>
@@ -36,6 +39,7 @@ function Profile() {
             </div>
             <Navbar />
         </section>
+        </div>
     );
 }
 
