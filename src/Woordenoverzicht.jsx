@@ -27,8 +27,6 @@ function Woordenoverzicht() {
                 />
             </button>
 
-            <HrLogo />
-
             <div>
                 <h1 className="text-3xl font-bold mb-4 ml-8 space-y-4">Gebaren</h1>
                 <h2 className="text-xl font-bold mb-10 ml-8">Vraagwoorden</h2>
