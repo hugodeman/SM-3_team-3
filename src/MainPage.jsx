@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NavbarMobile from "./components/navbar-mobile.jsx";
+import { useDarkMode } from './context/Darkmode.jsx';
 
 function MainPage() {
+
+    const { darkMode, toggleDarkMode } = useDarkMode();
+
     return (
-        <div className="bg-background min-h-screen flex flex-col justify-between pb-24">
+        <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black min-h-screen flex flex-col justify-between pb-24"}>
             {/* Welkomsttekst */}
             <div className="p-6 relative">
-                <h1 className="text-3xl font-bold text-black">Welkom Jan</h1>
-                <p className="text-lg text-black mt-2 max-w-xs">
+                <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom Jan</h1>
+                <p className={`text-lg mt-2 max-w-xs ${darkMode ? 'text-gray-300' : 'text-black'}`}>
                     Alles wat je nodig hebt voor jouw Nederlandse gebarentaalavontuur, op één plek.
                     Leer vingerspellen, bouw zinnen en volg je vooruitgang met onze interactieve lesstof.
                 </p>
