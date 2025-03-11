@@ -1,14 +1,30 @@
 import Buttons from "../components/buttons.jsx";
 import Navbar from "../components/navbar-mobile.jsx";
+import HrLogo from "../components/hrlogo.jsx";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function Les1 () {
-    return(
+function Les1() {
+    const navigate = useNavigate();
+    return (
         <>
+            {/* Back Arrow */}
+            <button
+                onClick={() => navigate('/lesstof')} // Navigate to the previous page
+                className="absolute top-9 left-4" // Positioning styles
+            >
+                <img
+                    src="/src/assets/Icons/Back arrow.png" // Update the path to your back arrow image
+                    alt="Back Arrow"
+                    className="h-6 w-auto" // Adjust size as needed
+                />
+            </button>
+            <HrLogo/>
             <div className={'mr-5 ml-5'}>
                 <h1 className={'m-1 text-2xl font-bold '}>Les 1</h1>
                 <h2 className={'font-bold text-xl py-4'}> leer de gebaren </h2>
                 <div className={'pb-5'}>
-                    <Buttons text="Bekijk gebaren" to="/woordenoverzicht"/>
+                    <Buttons text="Bekijk gebaren" to="/lesstof/week1/woordenoverzicht"/>
                 </div>
 
                 <div className={'border-t border-black pt-5'}>
