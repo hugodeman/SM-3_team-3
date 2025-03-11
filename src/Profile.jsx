@@ -22,7 +22,7 @@ function Profile() {
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"}>
             <HrLogo /> {/* Je HR logo component */}
             <section id="profile-container" className="p-4">
-                <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Profile</h1>
+                <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Profiel</h1>
                 <h2 className={`text-lg ${darkMode ? 'text-gray-400' : 'text-gray-800'}`}>Welkom gebruiker</h2>
 
                 {/* Darkmode Toggle */}
