@@ -54,6 +54,42 @@ function Lesson() {
                 ))}
             </div>
             <NavbarMobile />
+            <div className="pb-10 mb-10">
+                {Array.from({ length: weeks.length / 2 }).map((_, i) => (
+                    <div key={i} className="flex justify-around mb-16">
+                        {weeks.slice(i * 2, i * 2 + 2).map((week, j) => {
+                            const currentIndex = i * 2 + j;
+                            return (
+                                <div key={j} className="relative">
+                                    <button
+                                        className="bg-customRed py-4 px-10 text-white rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl"
+                                        onClick={() => toggleDropdown(currentIndex)}
+                                    >
+                                        {week}
+                                    </button>
+                                    <div
+                                        className={`${
+                                            openDropdown === currentIndex
+                                                ? "max-h-screen translate-y-0 opacity-100"
+                                                : "max-h-0 -translate-y-2 opacity-0 pointer-events-none"
+                                        } transition-all duration-500 left-0 mt-2 bg-white shadow-lg rounded-lg overflow-hidden`}
+                                    >
+                                    <ul>
+                                            <li className="py-2 px-4 hover:bg-gray-200 cursor-pointer">
+                                                Opdrachten
+                                            </li>
+                                            <li className="py-2 px-4 hover:bg-gray-200 cursor-pointer">
+                                                Theorie
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                ))}
+            </div>
+            <NavbarMobile />
         </>
     );
 }
