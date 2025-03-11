@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import NavbarMobile from "./components/navbar-mobile.jsx";
+import Hrlogo from "./components/hrlogo.jsx";
 
 function Lessons() {
     const weeks = [
@@ -15,6 +16,7 @@ function Lessons() {
 
     return (
         <>
+            <Hrlogo />
             <div>
                 <h1 className="text-3xl font-bold mb-10 ml-8">Lesstof</h1>
             </div>
