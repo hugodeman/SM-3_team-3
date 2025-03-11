@@ -1,33 +1,49 @@
-import "./index.css";
+import React from "react";
 
 function MainPage() {
     return (
-        <div className="container">
-            <header>
-                <h1>Welkom Jan</h1>
-                <p>
+        <div className="bg-[#F8F2E9] min-h-screen flex flex-col items-center p-6">
+
+            <header className="text-center mt-10">
+                <h1 className="text-3xl font-bold text-black">Welkom Jan</h1>
+                <p className="text-lg text-black mt-4 max-w-xs mx-auto">
                     Alles wat je nodig hebt voor jouw gebarentaalavontuur, op één plek.
-                    Leer vingerspellen, bouw zinnen en volg je vooruitgang met onze
-                    interactieve lesstof.
+                    Leer vingerspellen, bouw zinnen en volg je vooruitgang met onze interactieve lesstof.
                 </p>
             </header>
 
-            <div className="grid">
-                <div className="item">
-                    <img src="/lesstof.jpg" alt="Les stof" />
-                    <button>Les stof</button>
+            {/* Grid voor de afbeeldingen en buttons */}
+            <div className="grid grid-cols-2 gap-6 mt-10">
+                {/* Lesstof */}
+                <div className="flex flex-col items-center">
+                    <img src="/lesstof.jpg" alt="Lesstof" className="w-40 h-40 rounded-lg shadow-md" />
+                    <button className="bg-[#A90D3D] text-white font-bold py-2 px-6 rounded-full mt-2">
+                        Les stof
+                    </button>
                 </div>
-                <div className="item">
-                    <img src="/vingerspel.jpg" alt="Vingerspel" />
-                    <button>Vingerspel</button>
+
+                {/* Vingerspel */}
+                <div className="flex flex-col items-center">
+                    <img src="/vingerspel.jpg" alt="Vingerspel" className="w-40 h-40 rounded-lg shadow-md" />
+                    <button className="bg-[#A90D3D] text-white font-bold py-2 px-6 rounded-full mt-2">
+                        Vingerspel
+                    </button>
                 </div>
-                <div className="item">
-                    <img src="/theorie.jpg" alt="Theorie" />
-                    <button>Theorie</button>
+
+                {/* Theorie */}
+                <div className="flex flex-col items-center">
+                    <img src="/theorie.jpg" alt="Theorie" className="w-40 h-40 rounded-lg shadow-md" />
+                    <button className="bg-[#A90D3D] text-white font-bold py-2 px-6 rounded-full mt-2">
+                        Theorie
+                    </button>
                 </div>
-                <div className="item">
-                    <img src="/vooruitgang.jpg" alt="Vooruitgang" />
-                    <button>Vooruitgang</button>
+
+                {/* Vooruitgang */}
+                <div className="flex flex-col items-center">
+                    <img src="/vooruitgang.jpg" alt="Vooruitgang" className="w-40 h-40 rounded-lg shadow-md" />
+                    <button className="bg-[#A90D3D] text-white font-bold py-2 px-6 rounded-full mt-2">
+                        Vooruitgang
+                    </button>
                 </div>
             </div>
         </div>
