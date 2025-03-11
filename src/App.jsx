@@ -10,6 +10,7 @@ import Vingerspelherhaling from "./components/vingerspelherhaling.jsx";
 import Vingerspelcontrole from "./components/vingerspelcontrole.jsx";
 import Les1 from "./lessen/Les1.jsx";
 import Pauzemenu from "./components/pauzemenu.jsx";
+import MainPage from "./MainPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />
+                element: <MainPage />
             },
             {
                 path: "/vingerspel",
