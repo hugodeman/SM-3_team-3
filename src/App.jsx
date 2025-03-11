@@ -26,15 +26,15 @@ const router = createBrowserRouter([
                 element: <Vingerspelmenu />
             },
             {
-                path: "/vingerspel/oefening",
+                path: "/vingerspel/nieuweletter/:letter",
                 element: <Vingerspelnieuweletter />
             },
             {
-                path: "/vingerspel/herhaling",
+                path: "/vingerspel/herhaling/:letter",
                 element: <Vingerspelherhaling />
             },
             {
-                path: "/vingerspel/controle",
+                path: "/vingerspel/controle/:letter",
                 element: <Vingerspelcontrole />
             },
             {
@@ -61,15 +61,14 @@ const router = createBrowserRouter([
     }
 ]);
 
-
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
 
-  return (
-    <>
-        <RouterProvider router={router} />
-    </>
-  )
+    return (
+        <>
+            <RouterProvider router={router} />
+        </>
+    );
 }
 
 export default App;

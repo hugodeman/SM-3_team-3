@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import NavbarMobile from "./components/navbar-mobile.jsx";
 
 function MainPage() {
     return (
-        <div className="bg-[#F8F2E9] min-h-screen flex flex-col justify-between pb-24">
+        <div className="bg-background min-h-screen flex flex-col justify-between pb-24">
             {/* Welkomsttekst */}
             <div className="p-6 relative">
                 <h1 className="text-3xl font-bold text-black">Welkom Jan</h1>
@@ -18,17 +19,21 @@ function MainPage() {
                 {/* Lesstof */}
                 <div className="flex flex-col items-center w-4/5">
                     <img src="/lesstof.jpg" alt="Lesstof" className="w-44 h-44 rounded-lg shadow-md" />
-                    <button className="bg-[#A90D3D] text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
-                        Lesstof
-                    </button>
+                    <Link to="/lesstof">
+                        <button className="bg-customRed  hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
+                            Lesstof
+                        </button>
+                    </Link>
                 </div>
 
                 {/* Vingerspel */}
                 <div className="flex flex-col items-center w-4/5">
                     <img src="/vingerspel.jpg" alt="Vingerspel" className="w-44 h-44 rounded-lg shadow-md" />
-                    <button className="bg-[#A90D3D] text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
-                        Vingerspel
-                    </button>
+                    <Link to="/vingerspel">
+                        <button className="bg-customRed hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
+                            Vingerspel
+                        </button>
+                    </Link>
                 </div>
             </div>
 
