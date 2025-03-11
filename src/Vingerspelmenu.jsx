@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import Navbar from "./components/navbar-mobile.jsx";
 import Hrlogo from "./components/hrlogo.jsx";
+import NavbarMobile from "./components/navbar-mobile.jsx";
 
 function Vingerspelmenu() {
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ function Vingerspelmenu() {
                     </div>
                 </div>
             </div>
-            <Navbar />
+            <NavbarMobile />
         </div>
     );
 }
