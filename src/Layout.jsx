@@ -4,8 +4,8 @@ function Layout() {
     return (
         <div>
             <nav>
-                <Link to="/">Home</Link>
-                <Link to="/vingerspel">Vingerspel</Link>
+                {/*<Link to="/">Home</Link>*/}
+                {/*<Link to="/vingerspel">Vingerspel</Link>*/}
             </nav>
             <Outlet />
         </div>
