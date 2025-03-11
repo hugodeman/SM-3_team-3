@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import HrlogoPause from "./hrlogo&pause.jsx";
 
 function vingerspelherhaling() {
     const navigate = useNavigate();
@@ -9,6 +10,8 @@ function vingerspelherhaling() {
     };
 
     return (
+        <div>
+            <HrlogoPause />
         <div className="mt-10">
             <h1 className="text-3xl font-bold my-2 ml-[5%]">Herhaling</h1>
             <p className="text-base my-2 ml-[5%]">Gebaar de letter in Nederlandse Gebarentaal</p>
@@ -25,6 +28,7 @@ function vingerspelherhaling() {
                     Laat antwoord zien
                 </button>
             </div>
+        </div>
         </div>
     );
 }

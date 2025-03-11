@@ -10,22 +10,24 @@ import trofee_5 from "../src/assets/Trophy/Trophy-5.png";
 import trofee_6 from "../src/assets/Trophy/Trophy-6.png";
 import trofee_7 from "../src/assets/Trophy/Trophy-7.png";
 import Navbar from "./components/navbar-mobile.jsx";
+import Hrlogo from "./components/hrlogo.jsx";
 
-const trofeeën = [trofee_0, trofee_1, trofee_2, trofee_3, trofee_4, trofee_5, trofee_6, trofee_7];
+const trofeeën = [trofee_0, trofee_1, trofee_2, trofee_3, trofee_4, trofee_5, trofee_6];
 
 function Profile() {
     return (
         <div className="bg-background">
+            <Hrlogo />
             <section id="profile-container" className="p-4">
                 <h1 className="text-2xl font-bold">Profile</h1>
                 <h2 className="text-lg">Welkom gebruiker</h2>
 
-                {/* Darkmode Toggle */}
-                <label className="inline-flex items-center cursor-pointer my-4">
-                    <span className="me-4 text-sm font-medium text-gray-900 dark:text-black">Darkmode</span>
-                    <input type="checkbox" value="" className="sr-only peer" />
-                    <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-customRed dark:peer-checked:bg-customRed"></div>
-                </label>
+            {/* Darkmode Toggle */}
+            <label className="inline-flex items-center cursor-pointer my-4">
+                <input type="checkbox" value="" className="sr-only peer" />
+                <span className="ms-3 text-sm font-medium text-gray-900 dark:text-black">Darkmode</span>
+                <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-customRed dark:peer-checked:bg-customRed"></div>
+            </label>
 
 
                 {/* Trofeeën Sectie */}
