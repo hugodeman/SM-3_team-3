@@ -4,7 +4,7 @@ import NavbarMobile from "./components/navbar-mobile.jsx";
 
 function MainPage() {
     return (
-        <div className="bg-[#F8F2E9] min-h-screen flex flex-col justify-between pb-24">
+        <div className="bg-background min-h-screen flex flex-col justify-between pb-24">
             {/* Welkomsttekst */}
             <div className="p-6 relative">
                 <h1 className="text-3xl font-bold text-black">Welkom Jan</h1>
