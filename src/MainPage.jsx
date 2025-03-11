@@ -20,7 +20,7 @@ function MainPage() {
                 <div className="flex flex-col items-center w-4/5">
                     <img src="/lesstof.jpg" alt="Lesstof" className="w-44 h-44 rounded-lg shadow-md" />
                     <Link to="/lesstof">
-                        <button className="bg-customRed text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
+                        <button className="bg-customRed  hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
                             Lesstof
                         </button>
                     </Link>
@@ -30,7 +30,7 @@ function MainPage() {
                 <div className="flex flex-col items-center w-4/5">
                     <img src="/vingerspel.jpg" alt="Vingerspel" className="w-44 h-44 rounded-lg shadow-md" />
                     <Link to="/vingerspel">
-                        <button className="bg-customRed text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
+                        <button className="bg-customRed hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
                             Vingerspel
                         </button>
                     </Link>
