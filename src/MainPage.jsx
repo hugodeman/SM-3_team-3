@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NavbarMobile from "./components/navbar-mobile.jsx";
+import { useDarkMode } from './context/Darkmode.jsx';
 
 function MainPage() {
+
+    const { darkMode, toggleDarkMode } = useDarkMode();
+
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black min-h-screen flex flex-col justify-between pb-24"}>
             {/* Welkomsttekst */}
