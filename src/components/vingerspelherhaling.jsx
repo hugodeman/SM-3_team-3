@@ -10,7 +10,7 @@ function vingerspelherhaling() {
     };
 
     return (
-        <div>
+        <div className="mb-10">
             <HrlogoPause />
         <div className="mt-10">
             <h1 className="text-3xl font-bold my-2 ml-[5%]">Herhaling</h1>
