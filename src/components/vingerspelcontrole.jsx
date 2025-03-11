@@ -4,7 +4,7 @@ import HrlogoPause from "./hrlogo&pause.jsx";
 function vingerspelcontrole() {
 
     return (
-        <div>
+        <div className="mb-10">
             <HrlogoPause />
         <div className="mt-10">
             <h1 className="text-3xl font-bold my-2 ml-[5%]">Controleren: a</h1>

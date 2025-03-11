@@ -12,7 +12,7 @@ import trofee_7 from "../src/assets/Trophy/Trophy-7.png";
 import Navbar from "./components/navbar-mobile.jsx";
 import Hrlogo from "./components/hrlogo.jsx";
 
-const trofeeën = [trofee_0, trofee_1, trofee_2, trofee_3, trofee_4, trofee_5, trofee_6];
+const trofeeën = [trofee_0, trofee_1, trofee_2, trofee_3, trofee_4, trofee_5, trofee_6, trofee_7];
 
 function Profile() {
     return (
