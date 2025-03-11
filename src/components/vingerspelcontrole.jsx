@@ -1,8 +1,11 @@
 import React from 'react';
+import HrlogoPause from "./hrlogo&pause.jsx";
 
 function vingerspelcontrole() {
 
     return (
+        <div>
+            <HrlogoPause />
         <div className="mt-10">
             <h1 className="text-3xl font-bold my-2 ml-[5%]">Controleren: a</h1>
             <p className="text-base my-2 ml-[5%]">Zie het gebaar hieronder. Ging het goed?</p>
@@ -21,6 +24,7 @@ function vingerspelcontrole() {
                     <span className="text-white">✓</span>
                 </button>
             </div>
+        </div>
         </div>
     );
 }
