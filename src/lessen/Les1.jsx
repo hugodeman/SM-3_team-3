@@ -1,4 +1,5 @@
 import Buttons from "../components/buttons.jsx";
+import Navbar from "../components/navbar-mobile.jsx";
 
 function Les1 () {
     return(
@@ -49,6 +50,7 @@ function Les1 () {
                         <Buttons text="Oefen" to="/opdracht3"/>
                     </div>
                 </div>
+                <Navbar />
             </div>
         </>
     )
