@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import Vingerspelmenu from "./Vingerspelmenu.jsx";
 import Profile from "./Profile.jsx";
-import { useState } from 'react'
+import { useState } from 'react';
 import Home from "./Home.jsx";
 import Lesstof from "./Lesstof.jsx";
 import Vingerspelnieuweletter from "./components/vingerspelnieuweletter.jsx";
@@ -25,15 +25,15 @@ const router = createBrowserRouter([
                 element: <Vingerspelmenu />
             },
             {
-                path: "/vingerspel/oefening",
+                path: "/vingerspel/nieuweletter/:letter",
                 element: <Vingerspelnieuweletter />
             },
             {
-                path: "/vingerspel/herhaling",
+                path: "/vingerspel/herhaling/:letter",
                 element: <Vingerspelherhaling />
             },
             {
-                path: "/vingerspel/controle",
+                path: "/vingerspel/controle/:letter",
                 element: <Vingerspelcontrole />
             },
             {
@@ -56,15 +56,14 @@ const router = createBrowserRouter([
     }
 ]);
 
-
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
 
-  return (
-    <>
-        <RouterProvider router={router} />
-    </>
-  )
+    return (
+        <>
+            <RouterProvider router={router} />
+        </>
+    );
 }
 
 export default App;
