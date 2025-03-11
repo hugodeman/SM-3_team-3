@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import NavbarMobile from "./components/navbar-mobile.jsx";
 
-function Lesson() {
+function Lessons() {
     const weeks = [
         "Week 1", "Week 2", "Week 3", "Week 4",
         "Week 5", "Week 6", "Week 7", "Week 8"
@@ -57,4 +57,4 @@ function Lesson() {
     );
 }
 
-export default Lesson
+export default Lessons
