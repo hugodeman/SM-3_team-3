@@ -37,8 +37,8 @@ function Profile() {
                     </div>
                 ))}
             </div>
-            <Navbar />
         </section>
+            <Navbar />
         </div>
     );
 }
