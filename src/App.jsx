@@ -11,6 +11,7 @@ import Vingerspelcontrole from "./components/vingerspelcontrole.jsx";
 import Les1 from "./lessen/Les1.jsx";
 import Pauzemenu from "./components/pauzemenu.jsx";
 import MainPage from "./MainPage.jsx";
+import Opdracht_1 from "./opdrachten/Opdracht_1.jsx";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: "/les1",
                 element: <Les1/>
+            },
+            {
+                path: '/opdracht1',
+                element: <Opdracht_1/>
             },
             {
                 path: "/pauze",
