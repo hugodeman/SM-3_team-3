@@ -11,8 +11,8 @@ function vingerspelherhaling() {
     };
 
     return (
-        <div className="mb-10">
-            <HrlogoPause />
+        <div className="min-h-screen">
+            <HrlogoPause/>
             <div className="mt-10">
                 <h1 className="text-3xl font-bold my-2 ml-[5%]">Herhaling: {letter}</h1>
                 <p className="text-base my-2 ml-[5%]">Gebaar de letter in Nederlandse Gebarentaal</p>

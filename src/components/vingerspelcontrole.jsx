@@ -14,8 +14,8 @@ function vingerspelcontrole() {
     };
 
     return (
-        <div className="mb-10">
-            <HrlogoPause />
+        <div className="min-h-screen">
+            <HrlogoPause/>
             <div className="mt-10">
                 <h1 className="text-3xl font-bold my-2 ml-[5%]">Controleren: {letter}</h1>
                 <p className="text-base my-2 ml-[5%]">Zie het gebaar hieronder. Ging het goed?</p>
