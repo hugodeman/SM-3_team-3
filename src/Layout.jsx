@@ -7,7 +7,7 @@ function Layout() {
 
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background"}>
-            <img className="absolute right-0 top-0 m-4 max-w-16" src="../src/assets/Logo/HR-Logo-200px.png" alt="HR Logo"/>
+            <img className="absolute right-0 top-0 m-4 max-w-16" src="/src/assets/Logo/HR-Logo-200px.png" alt="HR Logo"/>
             <div className={darkMode ? "bg-backgroundDarkMode pt-20 text-white" : "bg-background pt-20"}>
                 <Outlet />
             </div>
