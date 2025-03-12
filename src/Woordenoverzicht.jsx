@@ -14,7 +14,7 @@ function Woordenoverzicht() {
     const closePopUp = () => setActivePopUp(null);
 
     return (
-        <>
+        <div className="h-[85vh]">
             {/* Back Arrow */}
             <button
                 onClick={() => navigate('/lesstof/week1')} // Navigate to the previous page
@@ -31,7 +31,7 @@ function Woordenoverzicht() {
                 <h1 className="text-3xl font-bold mb-4 ml-8 space-y-4">Gebaren</h1>
                 <h2 className="text-xl font-bold mb-10 ml-8">Vraagwoorden</h2>
             </div>
-            <div className="flex flex-col w-2/3 mx-auto">
+            <div className="flex flex-col w-2/3 mx-auto mt-10">
                 {/* Buttons with pop-up triggers */}
                 <button
                     className="bg-customRed hover:bg-customRedHover font-bold mb-6 py-4 px-10 text-white rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl"
@@ -79,7 +79,7 @@ function Woordenoverzicht() {
             )}
 
             <NavbarMobile />
-        </>
+        </div>
     );
 }
 
