@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import hrLogo from '../assets/Logo/HR-Logo-200px.png';
 
 const HrLogoPause = () => {
     const navigate = useNavigate();
@@ -16,8 +17,7 @@ const HrLogoPause = () => {
                 </button>
             </div>
             <div>
-                <img className="absolute right-0 top-0 m-4 max-w-16" src="../src/assets/Logo/HR-Logo-200px.png"
-                     alt="HR Logo"/>
+                <img className="absolute right-0 top-0 m-4 max-w-16" src={hrLogo} alt="HR Logo"/>
             </div>
         </div>
     );
