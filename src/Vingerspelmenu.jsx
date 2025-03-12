@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDarkMode } from './context/Darkmode.jsx'; // Import Dark Mode Context
-import Navbar from "./components/navbar-mobile.jsx";
+import { useDarkMode } from './context/Darkmode.jsx';
 import Hrlogo from "./components/hrlogo.jsx";
 import NavbarMobile from "./components/navbar-mobile.jsx";
 
 function Vingerspelmenu() {
     const navigate = useNavigate();
-    const { darkMode } = useDarkMode(); // Dark mode ophalen
+    const { darkMode } = useDarkMode();
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
     const [selectedLetter, setSelectedLetter] = useState(null);
 
@@ -32,7 +31,6 @@ function Vingerspelmenu() {
                     Leer hier alle letters in Nederlandse Gebarentaal
                 </p>
 
-                {/* Leren Button */}
                 <div className="flex justify-center mt-[10%]">
                     <button
                         onClick={handleLearnClick}
@@ -42,15 +40,14 @@ function Vingerspelmenu() {
                     </button>
                 </div>
 
-                {/* Letter Grid */}
                 <div className="flex justify-center mt-8">
                     <div className="grid grid-cols-3 gap-8">
                         {alphabet.map((letter) => (
                             <div
                                 key={letter}
                                 onClick={() => handleLetterClick(letter)}
-                                className={`flex flex-col items-center justify-center w-20 h-24 border-2 
-                                    rounded-lg font-bold text-2xl pb-3 cursor-pointer transition-transform 
+                                className={`flex flex-col items-center justify-center w-20 h-24 border-2
+                                    rounded-lg font-bold text-2xl pb-3 cursor-pointer transition-transform
                                     hover:scale-105 ${
                                     darkMode
                                         ? "bg-gray-800 border-gray-600 text-white"
@@ -64,19 +61,17 @@ function Vingerspelmenu() {
                 </div>
             </div>
 
-            {/* Pop-up bij klikken op een letter */}
             {selectedLetter && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className={`p-5 rounded-lg flex flex-col items-center ${
                         darkMode ? "bg-gray-800 text-white border border-gray-600" : "bg-white text-black"
                     }`}>
                         <h2 className="text-5xl font-bold">{selectedLetter}</h2>
-                        <div className={`flex flex-col items-center justify-center w-60 h-80 border-2 
+                        <div key={selectedLetter} className={`flex flex-col items-center justify-center w-60 h-80 border-2
                             rounded-lg font-bold text-2xl pb-3 mx-auto mt-8 ${
                             darkMode ? "border-gray-600 bg-gray-700" : "border-[#CF0245] bg-white"
                         }`}
                         >
-                            {/* Leeg vak */}
                         </div>
                         <button
                             onClick={handleClosePopup}
