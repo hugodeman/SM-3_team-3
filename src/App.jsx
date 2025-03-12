@@ -10,7 +10,6 @@ import Vingerspelcontrole from "./components/vingerspelcontrole.jsx";
 import Les1 from "./lessen/Les1.jsx";
 import Pauzemenu from "./components/pauzemenu.jsx";
 import MainPage from "./MainPage.jsx";
-import Gebaren from "./Woordenoverzicht.jsx";
 import Woordenoverzicht from "./Woordenoverzicht.jsx";
 
 const router = createBrowserRouter([
