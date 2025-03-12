@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from './context/Darkmode.jsx';
 import Hrlogo from "./components/hrlogo.jsx";
@@ -7,8 +7,31 @@ import NavbarMobile from "./components/navbar-mobile.jsx";
 function Vingerspelmenu() {
     const navigate = useNavigate();
     const { darkMode } = useDarkMode();
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    const [letters, setLetters] = useState([]);
     const [selectedLetter, setSelectedLetter] = useState(null);
+
+    const token = import.meta.env.VITE_BEARER_TOKEN;
+    const link = import.meta.env.VITE_GENERAL_LINK;
+
+    useEffect(() => {
+        fetchLetters();
+    }, []);
+
+    async function fetchLetters() {
+        try {
+            const response = await fetch(`${link}/alphabet-letters`, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            setLetters(data);
+        } catch (error) {
+            console.error("Error fetching letters:", error);
+        }
+    }
 
     const handleLearnClick = () => {
         navigate('/vingerspel/nieuweletter/a');
@@ -42,9 +65,9 @@ function Vingerspelmenu() {
 
                 <div className="flex justify-center mt-8">
                     <div className="grid grid-cols-3 gap-8">
-                        {alphabet.map((letter) => (
+                        {letters.map((letter) => (
                             <div
-                                key={letter}
+                                key={letter.id}
                                 onClick={() => handleLetterClick(letter)}
                                 className={`flex flex-col items-center justify-center w-20 h-24 border-2
                                     rounded-lg font-bold text-2xl pb-3 cursor-pointer transition-transform
@@ -54,7 +77,7 @@ function Vingerspelmenu() {
                                         : "bg-white border-[#CF0245] text-black"
                                 }`}
                             >
-                                {letter}
+                                {letter.letter}
                             </div>
                         ))}
                     </div>
@@ -66,12 +89,13 @@ function Vingerspelmenu() {
                     <div className={`p-5 rounded-lg flex flex-col items-center ${
                         darkMode ? "bg-gray-800 text-white border border-gray-600" : "bg-white text-black"
                     }`}>
-                        <h2 className="text-5xl font-bold">{selectedLetter}</h2>
-                        <div key={selectedLetter} className={`flex flex-col items-center justify-center w-60 h-80 border-2
+                        <h2 className="text-5xl font-bold">{selectedLetter.letter}</h2>
+                        <div key={selectedLetter.id} className={`flex flex-col items-center justify-center w-60 h-80 border-2
                             rounded-lg font-bold text-2xl pb-3 mx-auto mt-8 ${
                             darkMode ? "border-gray-600 bg-gray-700" : "border-[#CF0245] bg-white"
                         }`}
                         >
+                            <img src={selectedLetter.sign} alt={selectedLetter.letter} className="w-full h-full object-contain" />
                         </div>
                         <button
                             onClick={handleClosePopup}
