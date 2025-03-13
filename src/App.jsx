@@ -8,10 +8,10 @@ import Lesstof from "./Lesstof.jsx";
 import Vingerspelnieuweletter from "./components/vingerspelnieuweletter.jsx";
 import Vingerspelherhaling from "./components/vingerspelherhaling.jsx";
 import Vingerspelcontrole from "./components/vingerspelcontrole.jsx";
-import Les1 from "./lessen/Les1.jsx";
+import Les from "./lessen/Les.jsx";
 import Pauzemenu from "./components/pauzemenu.jsx";
 import MainPage from "./MainPage.jsx";
-import Opdracht_1 from "./opdrachten/Opdracht_1.jsx";
+import Opdracht from "./opdrachten/Opdracht.jsx";
 
 const router = createBrowserRouter([
     {
@@ -46,12 +46,12 @@ const router = createBrowserRouter([
                 element: <Lesstof/>
             },
             {
-                path: "/les1",
-                element: <Les1/>
+                path: "/les/:lessonId",
+                element: <Les/>
             },
             {
-                path: '/opdracht1',
-                element: <Opdracht_1/>
+                path: '/opdracht/:lessonId',
+                element: <Opdracht/>
             },
             {
                 path: "/pauze",

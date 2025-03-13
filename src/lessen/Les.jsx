@@ -1,14 +1,38 @@
 import Buttons from "../components/buttons.jsx";
 import Navbar from "../components/navbar-mobile.jsx";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
-function Les1 () {
+const link = import.meta.env.VITE_GENERAL_LINK;
+const token = import.meta.env.VITE_BEARER_TOKEN;
+
+function Les () {
+    const [words, setWords] = useState([]);
+    const { lessonId } = useParams();
+    const params = useParams();
+    console.log(params);
+
+    useEffect(() => {
+        fetch(`${link}/words?lesson_id=${lessonId}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        })
+
+            .then(res => res.json())
+            .then(data => setWords(data))
+            .catch(err => console.error(err));
+    }, [lessonId]);
+
     return(
         <>
             <div className={'mr-5 ml-5'}>
-                <h1 className={'m-1 text-2xl font-bold '}>Les 1</h1>
+                <h1 className={'m-1 text-2xl font-bold '}>Les {lessonId}</h1>
                 <h2 className={'font-bold text-xl py-4'}> leer de gebaren </h2>
                 <div className={'pb-5'}>
-                    <Buttons text="Bekijk gebaren" to="/woordenoverzicht"/>
+                    <Buttons text="Bekijk gebaren" to={`/woordenoverzicht/${lessonId}`}/>
                 </div>
 
                 <div className={'border-t border-black pt-5'}>
@@ -21,7 +45,7 @@ function Les1 () {
                         <p className={'text-lg py-4'}>oefen woorden</p>
                     </div>
                     <div className={'pb-5'}>
-                        <Buttons text="Oefen" to="/opdracht1"/>
+                        <Buttons text="Oefen" to={`/opdracht1/${lessonId}`}/>
                     </div>
                 </div>
 
@@ -34,7 +58,7 @@ function Les1 () {
                         <p className={'text-lg py-4'}>oefen gebaren</p>
                     </div>
                     <div className={'pb-5'}>
-                        <Buttons text="Oefen" to="/opdracht2"/>
+                        <Buttons text="Oefen" to={`/opdracht2/${lessonId}`}/>
                     </div>
                 </div>
 
@@ -47,7 +71,7 @@ function Les1 () {
                         <p className={'text-lg py-4'}>oefen zinnen</p>
                     </div>
                     <div className={'pb-5'}>
-                        <Buttons text="Oefen" to="/opdracht3"/>
+                        <Buttons text="Oefen" to={`/opdracht3/${lessonId}`}/>
                     </div>
                 </div>
 
@@ -61,7 +85,7 @@ function Les1 () {
                         <p className={'text-lg py-4'}>toets </p>
                     </div>
                     <div className={'pb-5 mb-20'}>
-                        <Buttons text="Oefen" to="/opdracht1"/>
+                        <Buttons text="Oefen" to="/toets1"/>
                     </div>
                 </div>
             </div>
@@ -70,4 +94,4 @@ function Les1 () {
     )
 }
 
-export default Les1
+export default Les
