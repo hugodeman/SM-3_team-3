@@ -9,8 +9,8 @@ import Vingerspelcontrole from "./components/vingerspelcontrole.jsx";
 import Les from "./lessen/Les.jsx";
 import Pauzemenu from "./components/pauzemenu.jsx";
 import MainPage from "./MainPage.jsx";
-import Opdracht from "./opdrachten/Opdracht.jsx";
 import Woordenoverzicht from "./Woordenoverzicht.jsx";
+import OpdrachtGebaren from "./opdrachten/Opdracht.jsx";
 
 const router = createBrowserRouter([
     {
@@ -49,8 +49,8 @@ const router = createBrowserRouter([
                 element: <Les/>
             },
             {
-                path: '/opdracht/:lessonId',
-                element: <Opdracht/>
+                path: '/opdracht1/:lessonId',
+                element: <OpdrachtGebaren/>
             },
 
             // path: "/lesstof/woordenoverzicht/:lessonId"

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 
-function Opdracht(){
+function OpdrachtGebaren(){
     const { lessonId } = useParams();
 
     const [words, setWords] = useState([]);
@@ -100,4 +100,4 @@ function checkAnswer(selected, correct, nextWord) {
     }
 }
 
-export default Opdracht
+export default OpdrachtGebaren
