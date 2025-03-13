@@ -40,24 +40,24 @@ function OpdrachtGebaren(){
     console.log(words)
 
     if (words.length === 0) return <p>Laden...</p>;
-    //
+
     const currentWord = words[currentIndex];
-    //
+
     console.log(currentWord)
-    //
+
     if (!currentWord || !currentWord.video_path) {
         return <p>Onjuiste data ontvangen of leeg.</p>;
     }
-    //
+
     const handleNextWord = () => {
-    //     setCurrentIndex(prevIndex => {
-    //         if (prevIndex < words.length - 1) {
-    //             return prevIndex + 1;
-    //         } else {
-    //             alert("Je hebt alle woorden geoefend!");
-    //             return prevIndex;
-    //         }
-    //     });
+        setCurrentIndex(prevIndex => {
+            if (prevIndex < words.length - 1) {
+                return prevIndex + 1;
+            } else {
+                alert("Je hebt alle woorden geoefend!");
+                return prevIndex;
+            }
+        });
     };
 
     return (
@@ -67,29 +67,24 @@ function OpdrachtGebaren(){
 
             <video src={currentWord.video_path} controls />
 
-            {/*<div>*/}
-            {/*    {generateOptions(words, currentWord.word).map((option, index) => (*/}
-            {/*        <button key={index} onClick={() => checkAnswer(option, currentWord.word, handleNextWord)}>*/}
-            {/*            {option}*/}
-            {/*        </button>*/}
-            {/*    ))}*/}
-            {/*</div>*/}
+            <div>
+                {generateOptions(words, currentWord.title).map((option, index) => (
+                    <button key={index} onClick={() => checkAnswer(option, currentWord.title, handleNextWord)}>
+                        {option}
+                    </button>
+                ))}
+            </div>
         </div>
     );
 }
 
 function generateOptions(words, correctWord) {
-    let options = [correctWord];
+    let shuffledWords = [...words].map(w => w.title).sort(() => Math.random() - 0.5);
+    let filteredWords = shuffledWords.filter(word => word !== correctWord);
 
-    while (options.length < 4) {
-        let randomWord = words[Math.floor(Math.random() * words.length)].word;
-        if (!options.includes(randomWord)) {
-            options.push(randomWord);
-        }
-    }
-
-    return options.sort(() => Math.random() - 0.5);
+    return [correctWord, ...filteredWords.slice(0, 3)].sort(() => Math.random() - 0.5);
 }
+
 
 function checkAnswer(selected, correct, nextWord) {
     if (selected === correct) {
