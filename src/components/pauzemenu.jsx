@@ -13,7 +13,7 @@ function Pauzemenu() {
     };
 
     return (
-        <div className="mt-20">
+        <div className="min-h-screen">
             <h1 className="text-3xl font-bold my-2 ml-[13%]">Pauze</h1>
             <p className="text-base my-2 ml-[13%]">Het leren is gepauzeerd</p>
 
