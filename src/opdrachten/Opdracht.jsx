@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import HrlogoPause from "../components/hrlogo&pause.jsx";
 
 
 function OpdrachtGebaren(){
@@ -92,6 +93,7 @@ function OpdrachtGebaren(){
 
     return (
         <div className={'mx-5'}>
+            <HrlogoPause/>
             <h1 className={'text-2xl font-bold'}>Oefening {currentIndex + 1} van {words.length}</h1>
             <p>Welk woord hoort bij dit gebaar?</p>
 
