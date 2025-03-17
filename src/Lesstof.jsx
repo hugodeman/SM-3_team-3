@@ -4,7 +4,7 @@ import NavbarMobile from "./components/navbar-mobile.jsx";
 import HrLogo from "./components/hrlogo.jsx";
 
 function Lessons() {
-    const { lessonId } = useParams();
+    const {lessonId} = useParams();
 
     const weeks = [
         "Week 1", "Week 2", "Week 3", "Week 4",

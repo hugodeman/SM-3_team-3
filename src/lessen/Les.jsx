@@ -3,13 +3,14 @@ import Navbar from "../components/navbar-mobile.jsx";
 import HrLogo from "../components/hrlogo.jsx";
 import {useEffect, useState} from "react";
 import {useParams, useNavigate} from "react-router-dom";
+import BackArrow from "../components/back-arrow.jsx";
 
 const link = import.meta.env.VITE_GENERAL_LINK;
 const token = import.meta.env.VITE_BEARER_TOKEN;
 
-function Les () {
+function Les() {
     const [words, setWords] = useState([]);
-    const { lessonId } = useParams();
+    const {lessonId} = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,26 +27,16 @@ function Les () {
             .catch(err => console.error(err));
     }, [lessonId]);
 
-    return(
+    return (
         <>
             {/* Back Arrow */}
-            <button
-                onClick={() => navigate(-1)} // Navigate to the previous page
-                className="absolute top-9 left-4" // Positioning styles
-            >
-                <img
-                    src="/src/assets/Icons/Back arrow.png" // Update the path to your back arrow image
-                    alt="Back Arrow"
-                    className="h-6 w-auto" // Adjust size as needed
-                />
-            </button>
+            <BackArrow/>
             <HrLogo/>
             <div className={'mr-5 ml-5'}>
                 <h1 className={'m-1 text-2xl font-bold '}>Les {lessonId}</h1>
                 <h2 className={'font-bold text-xl py-4'}> Leer de gebaren </h2>
                 <div className={'pb-5'}>
-                    <Buttons text="Bekijk gebaren" to="/lesstof/week1/woordenoverzicht"/>
-                {/* <Buttons text="Bekijk gebaren" to={`/woordenoverzicht/${lessonId}`}/>*/}
+                    <Buttons text="Bekijk gebaren" to={`/woordenoverzicht/${lessonId}`}/>
                 </div>
 
                 <div className={'border-t border-black pt-5'}>
