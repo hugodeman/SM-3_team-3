@@ -55,7 +55,7 @@ function Les () {
                         <Buttons text="30/30"/>
                     </div>
                     <div>
-                        <p className={'text-lg py-4'}>Oefen de woorden naar de gebaren</p>
+                        <p className={'text-lg py-4'}>Oefen de gebaren naar de woorden</p>
                     </div>
                     <div className={'pb-5'}>
                         <Buttons text="Oefen" to={`/opdracht1/${lessonId}`}/>
@@ -68,7 +68,7 @@ function Les () {
                         <Buttons text="30/30"/>
                     </div>
                     <div>
-                        <p className={'text-lg py-4'}>Oefen de gebaren naar de woorden</p>
+                        <p className={'text-lg py-4'}>Oefen de woorden naar de gebaren</p>
                     </div>
                     <div className={'pb-5'}>
                         <Buttons text="Oefen" to={`/opdracht2/${lessonId}`}/>
