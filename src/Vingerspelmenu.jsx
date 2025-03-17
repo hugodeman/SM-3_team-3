@@ -28,6 +28,7 @@ function Vingerspelmenu() {
             });
             const data = await response.json();
             setLetters(data);
+            console.log(data);
         } catch (error) {
             console.error("Error fetching letters:", error);
         }
