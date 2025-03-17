@@ -16,7 +16,7 @@ function VingerspelNieuweLetter() {
             <HrlogoPause/>
             <div className="mt-10">
                 <h1 className="text-3xl font-bold my-2 ml-[5%]">Nieuwe Letter: {letter} </h1>
-                <p className="text-base my-2 ml-[5%]">Bekijk de video en voer het gebaar uit in Nederlandse
+                <p className="text-base my-2 ml-[5%]">Bekijk de video en maak het gebaar in Nederlandse
                     Gebarentaal</p>
 
                 <div

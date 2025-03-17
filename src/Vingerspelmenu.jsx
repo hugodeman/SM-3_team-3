@@ -49,7 +49,7 @@ function Vingerspelmenu() {
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"}>
             <Hrlogo />
             <div className="p-9 text-left">
-                <h1 className={`text-3xl font-bold my-2 ml-[5%] ${darkMode ? 'text-white' : 'text-black'}`}>Vingerspel</h1>
+                <h1 className={`text-3xl font-bold my-2 ml-[5%] ${darkMode ? 'text-white' : 'text-black'}`}>Vingerspellen</h1>
                 <p className={`text-base my-2 ml-[5%] ${darkMode ? 'text-gray-300' : 'text-gray-800'}`}>
                     Leer hier alle letters in Nederlandse Gebarentaal
                 </p>
