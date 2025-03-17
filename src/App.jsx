@@ -11,6 +11,7 @@ import Pauzemenu from "./components/pauzemenu.jsx";
 import MainPage from "./MainPage.jsx";
 import Woordenoverzicht from "./Woordenoverzicht.jsx";
 import OpdrachtGebaren from "./opdrachten/Opdracht.jsx";
+import ZinnenMaken from "./opdrachten/ZinnenMaken.jsx";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
                 element: <OpdrachtGebaren/>
             },
             {
+                path: '/opdracht3/:lessonId',
+                element: <ZinnenMaken/>
+            },
+            // path: "/lesstof/woordenoverzicht/:lessonId"
+            {
                 path: "/lesstof/week1/woordenoverzicht",
                 element: <Woordenoverzicht/>
             },
@@ -63,6 +69,7 @@ const router = createBrowserRouter([
         ]
     }
 ]);
+
 function App() {
   return (
     <>

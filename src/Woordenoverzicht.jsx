@@ -18,7 +18,7 @@ function Woordenoverzicht() {
             {/* Back Arrow */}
             <button
                 //navigate -> lessonId
-                onClick={() => navigate('/lesstof')} // Navigate to the previous page
+                onClick={() => navigate(-1)} // Navigate to the previous page
                 className="absolute top-9 left-4" // Positioning styles
             >
                 <img
