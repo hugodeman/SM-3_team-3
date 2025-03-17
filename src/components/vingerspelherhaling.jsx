@@ -2,14 +2,16 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import HrlogoPause from "./hrlogo&pause.jsx";
 import { useDarkMode } from "../context/Darkmode.jsx";
+import { letters } from "../letters";
 
 function Vingerspelherhaling() {
     const navigate = useNavigate();
-    const { letter } = useParams();
+    const { id } = useParams();
+    const letter = letters[id - 3]; // Assuming id 3 corresponds to 'a'
     const { darkMode } = useDarkMode();
 
     const handleShowAnswerClick = () => {
-        navigate(`/vingerspel/controle/${letter}`);
+        navigate(`/vingerspel/controle/${id}`);
     };
 
     return (
