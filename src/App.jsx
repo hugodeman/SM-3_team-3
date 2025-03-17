@@ -42,7 +42,7 @@ const router = createBrowserRouter([
                 element: <Profile />
             },
             {
-                path: '/lesstof',
+                path: "/lesstof",
                 element: <Lesstof/>
             },
             {
@@ -50,16 +50,15 @@ const router = createBrowserRouter([
                 element: <Les/>
             },
             {
-                path: '/opdracht1/:lessonId',
+                path: "/opdracht1/:lessonId",
                 element: <OpdrachtGebaren/>
             },
             {
                 path: '/opdracht3/:lessonId',
                 element: <ZinnenMaken/>
             },
-            // path: "/lesstof/woordenoverzicht/:lessonId"
             {
-                path: "/lesstof/week1/woordenoverzicht",
+                path: "woordenoverzicht/:lessonId",
                 element: <Woordenoverzicht/>
             },
             {
