@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Buttons from "../components/buttons.jsx";
 import Navbar from "../components/navbar-mobile.jsx";
 import HrLogo from "../components/hrlogo.jsx";
+import HrlogoPause from "../components/hrlogo&pause.jsx";
 
 const link = import.meta.env.VITE_GENERAL_LINK;
 const token = import.meta.env.VITE_BEARER_TOKEN;
@@ -31,20 +32,9 @@ function ZinnenMaken() {
     };
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
-            {/* Back Arrow */}
-            <button
-                onClick={() => navigate(-1)}
-                className="absolute top-4 left-4 p-2 rounded-full bg-gray-200 hover:bg-gray-300"
-            >
-                <img
-                    src="/src/assets/Icons/Back arrow.png"
-                    alt="Back Arrow"
-                    className="h-6 w-auto"
-                />
-            </button>
+        <div className="flex flex-col items-center min-h-screen bg-background p-4">
 
-            <HrLogo />
+            <HrlogoPause />
             <h1 className="text-2xl font-bold my-4">Zinnen Maken</h1>
 
             {/* Video Weergave */}
@@ -71,8 +61,6 @@ function ZinnenMaken() {
             >
                 Controleer
             </button>
-
-            <Navbar />
         </div>
     );
 }
