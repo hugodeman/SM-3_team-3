@@ -54,11 +54,9 @@ function ZinnenMaken() {
 
             {/* Video Weergave */}
             <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden mb-4">
-
-                    <video  className="w-full" controls
-                        src={currentSentence.video_path}
-                    />
-
+                {currentSentence && (
+                    <video className="w-full" controls src={currentSentence.video_path} />
+                )}
             </div>
 
             {/* Input veld */}
