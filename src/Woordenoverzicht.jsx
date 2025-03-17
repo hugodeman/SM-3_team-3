@@ -41,7 +41,7 @@ function Woordenoverzicht() {
     const currentWords = words.slice(indexOfFirstWord, indexOfLastWord);
 
     return (
-        <div className="h-[85vh]">
+        <div className="h-[100vh]">
             <button
                 onClick={() => navigate("/les/" + lessonId)}
                 aria-label="Go Back"
