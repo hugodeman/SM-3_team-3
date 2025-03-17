@@ -11,6 +11,7 @@ import Pauzemenu from "./components/pauzemenu.jsx";
 import MainPage from "./MainPage.jsx";
 import Woordenoverzicht from "./Woordenoverzicht.jsx";
 import OpdrachtGebaren from "./opdrachten/Opdracht.jsx";
+import Opdracht_2 from "./opdrachten/Opdracht-2.jsx";
 import ZinnenMaken from "./opdrachten/ZinnenMaken.jsx";
 
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: '/opdracht1/:lessonId',
                 element: <OpdrachtGebaren/>
+            },
+            {
+                path: '/opdracht2/:lessonId',
+                element: <Opdracht_2/>
             },
             {
                 path: '/opdracht3/:lessonId',
