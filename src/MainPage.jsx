@@ -1,14 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import NavbarMobile from "./components/navbar-mobile.jsx";
 import { useDarkMode } from './context/Darkmode.jsx';
 
 function MainPage() {
-
     const { darkMode, toggleDarkMode } = useDarkMode();
+
+    const appUrl = import.meta.env.VITE_APP_URL;
+
+
 
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black min-h-screen flex flex-col justify-between pb-24"}>
+            <div>
+                <button
+                    onClick={() => window.location.href = `https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.169/api/auth/redirect-back-url/${appUrl}/`}
+                    className="bg-customRed text-white ml-5 px-6 py-3 rounded-lg hover:bg-customRedHover transition"
+                >
+                    Inloggen
+                </button>
+            </div>
+
             {/* Welkomsttekst */}
             <div className="p-6 relative">
                 <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom Jan</h1>

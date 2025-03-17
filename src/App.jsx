@@ -49,7 +49,7 @@ const router = createBrowserRouter([
                 element: <Les/>
             },
             {
-                path: '/opdracht1/:lessonId',
+                path: '/opdracht2/:lessonId',
                 element: <OpdrachtGebaren/>
             },
 
