@@ -1,26 +1,46 @@
-// src/components/Profile.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDarkMode } from './context/Darkmode.jsx';
-import trofee_0 from "./assets/Trophy/Trophy-0.png";
-import trofee_1 from "./assets/Trophy/Trophy-1.png";
-import trofee_2 from "./assets/Trophy/Trophy-2.png";
-import trofee_3 from "./assets/Trophy/Trophy-3.png";
-import trofee_4 from "./assets/Trophy/Trophy-4.png";
-import trofee_5 from "./assets/Trophy/Trophy-5.png";
-import trofee_6 from "./assets/Trophy/Trophy-6.png";
-import trofee_7 from "./assets/Trophy/Trophy-7.png";
 import Navbar from "./components/navbar-mobile.jsx";
 import HrLogo from "./components/HrLogo";
-
-// Array met trofeeën
-const trofeeën = [trofee_0, trofee_1, trofee_2, trofee_3, trofee_4, trofee_5, trofee_6, trofee_7];
+import trofee_0 from "./assets/Trophy/Trophy-0.png";
+import trofee_7 from "./assets/Trophy/Trophy-7.png";
 
 function Profile() {
     const { darkMode, toggleDarkMode } = useDarkMode();
+    const [userData, setUserData] = useState([]);
+    const test1 = trofee_0;
+    const test2 = trofee_7;
+
+
+    // API ophalen met useEffect
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/badges`, {
+                    headers: {
+                        "Authorization": `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Fout bij ophalen van data");
+                }
+
+                const data = await response.json();
+                console.log("📌 API Data:", data); // Log de data in de console
+                setUserData(data);
+            } catch (error) {
+                console.error("❌ Fout bij ophalen API:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"}>
-            <HrLogo /> {/* Je HR logo component */}
+            <HrLogo />
             <section id="profile-container" className="p-4">
                 <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Profile</h1>
                 <h2 className={`text-lg ${darkMode ? 'text-gray-400' : 'text-gray-800'}`}>Welkom gebruiker</h2>
@@ -40,21 +60,38 @@ function Profile() {
                 {/* Trofeeën Sectie */}
                 <p className={`text-lg font-semibold mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>Trofeeën:</p>
                 <div className="grid grid-cols-3 gap-6 mt-6">
-                    {trofeeën.map((trofee, index) => (
-                        <div
-                            key={index}
-                            className={`p-4 rounded-2xl shadow-xl flex flex-col items-center justify-center transition-transform hover:scale-105 border-2 text-center ${
-                                darkMode
-                                    ? "bg-gray-800 border-gray-700 text-white"
-                                    : "bg-white border-gray-300 text-gray-800"
-                            }`}
-                        >
-                            <img src={trofee} alt={`Trofee ${index}`} className="w-20 h-20 object-contain drop-shadow-md mb-2"/>
-                            <p className="text-sm">Voltooi de toets van week {index}.</p>
-                        </div>
-                    ))}
+                    {userData.length > 0 ? (
+                        userData.map((trofee) => (
+                            <div
+                                key={trofee.id}
+                                className={`p-4 rounded-2xl shadow-xl flex flex-col items-center justify-center transition-transform hover:scale-105 border-2 text-center ${
+                                    darkMode ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-800"}`}>
+                                <img src={`${trofee.image_url}`} alt={trofee.title} className="w-20 h-20 object-contain drop-shadow-md mb-2"/>
+                                <p className="text-sm">Voltooi de toets van week {trofee.required_score+1}.</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p>Geen trofeeën beschikbaar...</p>
+                    )}
                 </div>
             </section>
+
+            <div className="grid grid-cols-3 gap-6 mt-6">
+                {/* Trofee die je nog moet verdienen (bijvoorbeeld test1) */}
+                <div
+                    className={`p-4 rounded-2xl shadow-xl flex flex-col items-center justify-center transition-transform hover:scale-105 border-2 text-center ${
+                        darkMode
+                            ? "bg-gray-600 border-gray-500 text-white" // Grijs voor niet-verdiende trofee
+                            : "bg-gray-300 border-gray-400 text-gray-800"
+                    }`}>
+                    <img src={test1} alt="test img" className="w-20 h-20 object-contain drop-shadow-md mb-2"/>
+                    <p className="text-sm">Voltooi de toets van week.</p>
+                </div>
+
+                {/* Verdiende trofee (bijvoorbeeld test2) */}
+
+            </div>
+
             <Navbar />
         </div>
     );
