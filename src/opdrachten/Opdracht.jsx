@@ -8,10 +8,11 @@ function OpdrachtGebaren(){
     const [words, setWords] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [inputValue, setInputValue] = useState("");
+    const [options, setOptions] = useState([]);
+    const [popup, setPopup] = useState(null); // Voor pop-up content
 
     const token = import.meta.env.VITE_BEARER_TOKEN;
     const link = import.meta.env.VITE_GENERAL_LINK;
-
 
     async function fetchWord(){
         try {
@@ -38,7 +39,11 @@ function OpdrachtGebaren(){
         fetchWord()
     },[])
 
-    console.log(words)
+    useEffect(() => {
+        if (words.length > 0) {
+            setOptions(generateOptions(words, words[currentIndex]?.title));
+        }
+    }, [words, currentIndex]);
 
     if (words.length === 0) return <p>Laden...</p>;
 
@@ -51,14 +56,8 @@ function OpdrachtGebaren(){
     }
 
     const handleNextWord = () => {
-        setCurrentIndex(prevIndex => {
-            if (prevIndex < words.length - 1) {
-                return prevIndex + 1;
-            } else {
-                alert("Je hebt alle woorden geoefend!");
-                return prevIndex;
-            }
-        });
+        setPopup(null);
+        setCurrentIndex(prevIndex => (prevIndex < words.length - 1 ? prevIndex + 1 : prevIndex));
         setInputValue("");
     };
 
@@ -70,6 +69,26 @@ function OpdrachtGebaren(){
         event.preventDefault();
         checkAnswer(inputValue, currentWord.title, handleNextWord);
     };
+
+    function checkAnswer(selected, correct) {
+        if (selected === correct) {
+            setPopup(
+                <div className="popup success">
+                    <img src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" alt="Gefeliciteerd!" />
+                    <p>Goed gedaan!</p>
+                    <button onClick={handleNextWord} className="bg-customRed text-white px-4 py-2 rounded-lg mt-4">Volgende</button>
+                </div>
+            );
+        } else {
+            setPopup(
+                <div className="popup error">
+                    <p>Fout! Het juiste antwoord is:</p>
+                    <strong className="text-red-500">{correct}</strong>
+                    <button onClick={handleNextWord} className="bg-customRed text-white px-4 py-2 rounded-lg mt-4">Volgende</button>
+                </div>
+            );
+        }
+    }
 
     return (
         <div className={'mx-5'}>
@@ -95,14 +114,19 @@ function OpdrachtGebaren(){
             </div>
 
             <div className="flex flex-wrap gap-4">
-                {generateOptions(words, currentWord.title).map((option, index) => (
+                {options.map((option, index) => (
                     <button key={index} onClick={() => handleButtonClick(option)}
-                            className="px-4 py-2 bg-white text-lg border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition"
-                    >
+                            className="px-4 py-2 bg-white text-lg border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition">
                         {option}
                     </button>
                 ))}
             </div>
+
+            {popup && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg text-center">{popup}</div>
+                </div>
+            )}
         </div>
     );
 }
@@ -114,14 +138,5 @@ function generateOptions(words, correctWord) {
     return [correctWord, ...filteredWords.slice(0, 4)].sort(() => Math.random() - 0.5);
 }
 
-
-function checkAnswer(selected, correct, nextWord) {
-    if (selected === correct) {
-        alert("Goed!");
-        nextWord();
-    } else {
-        alert("Fout, probeer opnieuw.");
-    }
-}
 
 export default OpdrachtGebaren
