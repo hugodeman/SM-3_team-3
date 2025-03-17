@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import NavbarMobile from "./components/navbar-mobile.jsx";
 import { useDarkMode } from './context/Darkmode.jsx';
@@ -8,6 +8,25 @@ function MainPage() {
 
     const appUrl = import.meta.env.VITE_APP_URL;
 
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            fetch("http://145.24.223.169/api/auth/users", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => setUser(data))
+                .catch(() => setUser(null));
+        }
+        console.log(token)
+        console.log(user)
+    }, []);
 
 
     return (
