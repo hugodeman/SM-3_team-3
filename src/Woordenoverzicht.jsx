@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useParams} from 'react-router-dom';
+import { useDarkMode } from './context/Darkmode.jsx';
 
 const link = import.meta.env.VITE_GENERAL_LINK;
 const token = import.meta.env.VITE_BEARER_TOKEN;
@@ -9,6 +10,7 @@ function Woordenoverzicht() {
     const [activePopUp, setActivePopUp] = useState(null);
     const [words, setWords] = useState([]);
     const navigate = useNavigate();
+    const { darkMode } = useDarkMode();
 
     // Toegevoegde state voor pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -92,9 +94,9 @@ function Woordenoverzicht() {
             </div>
 
             {activePopUp && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                        <h2 className="text-2xl font-bold mb-4">{activePopUp.title}</h2>
+                <div className={`fixed inset-0 ${darkMode ? 'bg-gray-700 bg-opacity-80' : 'bg-black bg-opacity-50'} flex justify-center items-center`}>
+                    <div className={`rounded-lg p-6 shadow-lg ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+                    <h2 className="text-2xl font-bold mb-4">{activePopUp.title}</h2>
                         <video controls className="w-full mb-6">
                             <source src={activePopUp.video_path} type="video/mp4"/>
                             Je browser ondersteunt de video tag niet.
