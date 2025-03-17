@@ -44,13 +44,13 @@ function VingerspelNieuweLetter() {
         <div className="min-h-screen">
             <HrlogoPause/>
             <div className="mt-10">
-                <h1 className="text-3xl font-bold my-2 ml-[5%]">Nieuwe Letter: {letter?.letter} </h1>
+                <h1 className="text-3xl font-bold my-2 ml-[5%]">Nieuwe Letter: {letter ? letter.letter : 'Loading...'}</h1>
                 <p className="text-base my-2 ml-[5%]">Bekijk de video en maak het gebaar in Nederlandse
                     Gebarentaal</p>
 
                 <div
                     className="flex flex-col items-center justify-center w-60 h-80 border-2 border-[#CF0245] rounded-lg font-bold text-2xl pb-3 mx-auto mt-8">
-                    <img src={letter?.sign} alt={`Letter ${letter?.letter}`} className="w-full h-full object-contain" />
+                    <img src={letter ? letter.sign : ''} alt={`Letter ${letter ? letter.letter : 'Loading...'}`} className="w-full h-full object-contain" />
                 </div>
 
                 <div className="flex justify-center mt-[10%]">
