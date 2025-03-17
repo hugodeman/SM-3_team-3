@@ -3,56 +3,62 @@ import { useParams, useNavigate } from "react-router-dom";
 import Buttons from "../components/buttons.jsx";
 import Navbar from "../components/navbar-mobile.jsx";
 import HrLogo from "../components/hrlogo.jsx";
+import HrlogoPause from "../components/hrlogo&pause.jsx";
 
-const link = import.meta.env.VITE_GENERAL_LINK;
 const token = import.meta.env.VITE_BEARER_TOKEN;
+const link = import.meta.env.VITE_GENERAL_LINK;
 
 function ZinnenMaken() {
-    const [words, setWords] = useState([]);
+    const [sentences, setSentences] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const { lessonId } = useParams();
     const navigate = useNavigate();
     const [sentence, setSentence] = useState("");
 
-    useEffect(() => {
-        fetch(`${link}/words?lesson_id=${lessonId}`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
+    async function fetchSentences() {
+        try {
+            const res = await fetch(`${link}/sentence-building`, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                }
+            });
+
+            if (!res.ok) {
+                throw new Error(`HTTP-fout! status: ${res.status}`);
             }
-        })
-            .then(res => res.json())
-            .then(data => setWords(data))
-            .catch(err => console.error(err));
+
+            const data = await res.json();
+            setSentences(data);
+            console.log(data)
+        } catch (err) {
+            console.error("Fout bij ophalen data:", err);
+        }
+    }
+
+    useEffect(() => {
+        fetchSentences();
     }, [lessonId]);
 
     const handleCheck = () => {
         console.log("Ingevoerde zin:", sentence);
     };
 
-    return (
-        <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
-            {/* Back Arrow */}
-            <button
-                onClick={() => navigate(-1)}
-                className="absolute top-4 left-4 p-2 rounded-full bg-gray-200 hover:bg-gray-300"
-            >
-                <img
-                    src="/src/assets/Icons/Back arrow.png"
-                    alt="Back Arrow"
-                    className="h-6 w-auto"
-                />
-            </button>
+    const currentSentence = sentences[currentIndex];
 
-            <HrLogo />
+    return (
+        <div className="flex flex-col items-center min-h-screen bg-background p-4">
+            <HrlogoPause />
             <h1 className="text-2xl font-bold my-4">Zinnen Maken</h1>
 
             {/* Video Weergave */}
             <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden mb-4">
-                <video controls className="w-full">
-                    <source src="/" type="video/mp4" />
-                    Je browser ondersteunt geen video-element.
-                </video>
+
+                    <video  className="w-full" controls
+                        src={currentSentence.video_path}
+                    />
+
             </div>
 
             {/* Input veld */}
@@ -71,8 +77,6 @@ function ZinnenMaken() {
             >
                 Controleer
             </button>
-
-            <Navbar />
         </div>
     );
 }
