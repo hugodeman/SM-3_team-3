@@ -66,7 +66,7 @@ function MainPage() {
                     <img src="/vingerspel.jpg" alt="Vingerspel" className="w-44 h-44 rounded-lg shadow-md" />
                     <Link to="/vingerspel">
                         <button className="bg-customRed hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
-                            Vingerspel
+                            Vingerspellen
                         </button>
                     </Link>
                 </div>
