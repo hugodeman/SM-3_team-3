@@ -5,10 +5,11 @@ import { letters } from "../letters";
 
 function VingerspelNieuweLetter() {
     const navigate = useNavigate();
-    const { letter } = useParams();
+    const { id } = useParams();
+    const letter = letters[id - 3]; // Assuming id 3 corresponds to 'a'
 
     const handleNextClick = () => {
-        navigate(`/vingerspel/herhaling/${letter}`);
+        navigate(`/vingerspel/herhaling/${id}`);
     };
 
     return (

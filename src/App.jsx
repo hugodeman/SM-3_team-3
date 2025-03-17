@@ -25,15 +25,15 @@ const router = createBrowserRouter([
                 element: <Vingerspelmenu />
             },
             {
-                path: "/vingerspel/nieuweletter/:letter",
+                path: "/vingerspel/nieuweletter/:id",
                 element: <Vingerspelnieuweletter />
             },
             {
-                path: "/vingerspel/herhaling/:letter",
+                path: "/vingerspel/herhaling/:id",
                 element: <Vingerspelherhaling />
             },
             {
-                path: "/vingerspel/controle/:letter",
+                path: "/vingerspel/controle/:id",
                 element: <Vingerspelcontrole />
             },
             {
@@ -52,8 +52,6 @@ const router = createBrowserRouter([
                 path: '/opdracht1/:lessonId',
                 element: <OpdrachtGebaren/>
             },
-
-            // path: "/lesstof/woordenoverzicht/:lessonId"
             {
                 path: "/lesstof/week1/woordenoverzicht",
                 element: <Woordenoverzicht/>
@@ -65,7 +63,6 @@ const router = createBrowserRouter([
         ]
     }
 ]);
-
 function App() {
   return (
     <>

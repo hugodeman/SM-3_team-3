@@ -3,14 +3,18 @@ import { useParams, useNavigate } from "react-router-dom";
 import HrlogoPause from "./hrlogo&pause.jsx";
 import { letters } from "../letters";
 
-function vingerspelcontrole() {
-    const { letter } = useParams();
+function Vingerspelcontrole() {
+    const { id } = useParams();
     const navigate = useNavigate();
+    const letter = letters[id - 3]; // Assuming id 3 corresponds to 'a'
 
     const handleNextLetter = () => {
-        const currentIndex = letters.indexOf(letter);
-        const nextLetter = letters[(currentIndex + 1) % letters.length];
-        navigate(`/vingerspel/nieuweletter/${nextLetter}`);
+        const nextId = parseInt(id) + 1; // Increment id by 1
+        if (nextId > 28) {
+            navigate('/vingerspel'); // Navigate back to Vingerspelmenu if id exceeds 28
+        } else {
+            navigate(`/vingerspel/nieuweletter/${nextId}`);
+        }
     };
 
     return (
@@ -41,4 +45,4 @@ function vingerspelcontrole() {
     );
 }
 
-export default vingerspelcontrole;
+export default Vingerspelcontrole;

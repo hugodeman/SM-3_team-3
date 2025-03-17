@@ -34,7 +34,7 @@ function Vingerspelmenu() {
     }
 
     const handleLearnClick = () => {
-        navigate('/vingerspel/nieuweletter/a');
+        navigate('/vingerspel/nieuweletter/3'); // Assuming id 3 corresponds to 'a'
     };
 
     const handleLetterClick = (letter) => {
