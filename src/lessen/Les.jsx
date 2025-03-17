@@ -1,9 +1,8 @@
 import Buttons from "../components/buttons.jsx";
 import Navbar from "../components/navbar-mobile.jsx";
 import HrLogo from "../components/hrlogo.jsx";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams, useNavigate} from "react-router-dom";
-import BackArrow from "../components/back-arrow.jsx";
 
 const link = import.meta.env.VITE_GENERAL_LINK;
 const token = import.meta.env.VITE_BEARER_TOKEN;
@@ -29,8 +28,17 @@ function Les() {
 
     return (
         <>
-            {/* Back Arrow */}
-            <BackArrow/>
+            <button
+                onClick={() => navigate("/lesstof")}
+                aria-label="Go Back"
+                className="absolute top-9 left-4"
+            >
+                <img
+                    src="/src/assets/Icons/Back arrow.png"
+                    alt="Back Arrow Icon"
+                    className="h-6 w-auto"
+                />
+            </button>
             <HrLogo/>
             <div className={'mr-5 ml-5'}>
                 <h1 className={'m-1 text-2xl font-bold '}>Les {lessonId}</h1>

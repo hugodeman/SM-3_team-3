@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import {useParams} from 'react-router-dom';
-import BackArrow from "./components/back-arrow.jsx";
 
 const link = import.meta.env.VITE_GENERAL_LINK;
 const token = import.meta.env.VITE_BEARER_TOKEN;
@@ -8,6 +8,7 @@ const token = import.meta.env.VITE_BEARER_TOKEN;
 function Woordenoverzicht() {
     const [activePopUp, setActivePopUp] = useState(null);
     const [words, setWords] = useState([]);
+    const navigate = useNavigate();
 
     // Toegevoegde state voor pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -39,8 +40,17 @@ function Woordenoverzicht() {
 
     return (
         <div className="h-[85vh]">
-            <BackArrow/>
-
+            <button
+                onClick={() => navigate("/les/" + lessonId)}
+                aria-label="Go Back"
+                className="absolute top-9 left-4"
+            >
+                <img
+                    src="/src/assets/Icons/Back arrow.png"
+                    alt="Back Arrow Icon"
+                    className="h-6 w-auto"
+                />
+            </button>
             <div>
                 <h1 className="text-3xl font-bold mb-4 ml-8 space-y-4">Gebaren</h1>
                 <h2 className="text-xl font-bold mb-10 ml-8">Vraagwoorden</h2>
