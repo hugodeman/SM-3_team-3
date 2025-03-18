@@ -11,7 +11,9 @@ import Pauzemenu from "./components/pauzemenu.jsx";
 import MainPage from "./MainPage.jsx";
 import Woordenoverzicht from "./Woordenoverzicht.jsx";
 import OpdrachtGebaren from "./opdrachten/Opdracht.jsx";
+import Opdracht_2 from "./opdrachten/Opdracht-2.jsx";
 import ZinnenMaken from "./opdrachten/ZinnenMaken.jsx";
+import Progress from "./Progress.jsx";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
                 element: <Profile />
             },
             {
+                path: "/progress",
+                element: <Progress />
+            },
+            {
                 path: "/lesstof",
                 element: <Lesstof/>
             },
@@ -52,6 +58,10 @@ const router = createBrowserRouter([
             {
                 path: "/opdracht1/:lessonId",
                 element: <OpdrachtGebaren/>
+            },
+            {
+                path: '/opdracht2/:lessonId',
+                element: <Opdracht_2/>
             },
             {
                 path: '/opdracht3/:lessonId',
