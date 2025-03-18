@@ -33,7 +33,8 @@ function ZinnenMaken() {
 
             const sentencesWithStatus = data.map((sentence, index) => ({
                 full_sentence: sentence.full_sentence,
-                status: null  // Initial status for each sentence
+                video_path: sentence.video_path,
+                status: null
             }));
 
             localStorage.setItem(`Opdracht3-ZinnenMaken`, JSON.stringify(sentencesWithStatus));
