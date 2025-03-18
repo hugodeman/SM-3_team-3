@@ -67,7 +67,11 @@ function MainPage() {
 
             {/* Welkomsttekst */}
             <div className="p-6 relative">
-                <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom Jan</h1>
+                {user ? (
+                        <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom, {user.display_name}</h1>
+                    ) :
+                    <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom, Gebruiker</h1>
+                }
                 <p className={`text-lg mt-2 max-w-xs ${darkMode ? 'text-gray-300' : 'text-black'}`}>
                     Alles wat je nodig hebt voor jouw Nederlandse gebarentaalavontuur, op één plek.
                     Leer vingerspellen, bouw zinnen en volg je vooruitgang met onze interactieve lesstof.
