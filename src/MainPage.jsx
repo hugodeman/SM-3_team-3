@@ -24,32 +24,26 @@ function MainPage() {
         }
     }, [location.search]);
 
-    useEffect(() => {
-        if (token) {
-            fetch(`http://145.24.223.169/api/auth/users`, {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-                .then((res) => res.json())
-                .then((data) => setUser(data))
-                .catch(() => setUser(null));
-        }
-    }, [token]);
+    // useEffect(() => {
+    //     if (token) {
+    //         fetch(`http://145.24.223.169/api/auth/users?token=${token}`, {
+    //             method: "GET",
+    //             headers: {
+    //                 Accept: "application/json",
+    //                 Authorization: `Bearer ${token}`,
+    //             },
+    //         })
+    //             .then((res) => res.json())
+    //             .then((data) => setUser(data))
+    //             .catch(() => setUser(null));
+    //     }
+    // }, [token]);
 
     const removeToken = () => {
         localStorage.removeItem("token")
     }
 
-
-    // const handleLogout = () => {
-    //     localStorage.removeItem("token");
-    //     setUser(null);
-    //     setToken(null);
-    // };
-    console.log(user)
+    // console.log(user)
 
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black min-h-screen flex flex-col justify-between pb-24"}>
