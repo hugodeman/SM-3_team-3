@@ -133,7 +133,7 @@ function Profile() {
                     <div>
                         <label htmlFor="name" className="">Pas gebruikersnaam aan:</label>
                         <input type="text" name="display_name" id="display_name" value={formData.display_name} onChange={handleInputChange}
-                               className={`${darkMode ? 'text-black bg-customRed' : 'text-white'}px-4 py-2 text-lg text-center border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition`}
+                               className={`${darkMode ? 'text-white bg-gray-800 bg-opacity-30' : 'text-white'}px-4 py-2 text-lg text-center border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition`}
                         />
                     </div>
                     <button type={"submit"}
