@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HrlogoPause from "../components/hrlogo&pause.jsx";
+import {useDarkMode} from "../context/Darkmode.jsx";
 
 function OpdrachtGebaren() {
     const { lessonId } = useParams();
+    const { darkMode } = useDarkMode();
 
     const [words, setWords] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [inputValue, setInputValue] = useState("");
-    const [options, setOptions] = useState([]);
     const [popup, setPopup] = useState(null);
     const [weekData, setWeekData] = useState({});
+    const [options, setOptions] = useState([]);
 
     const token = import.meta.env.VITE_BEARER_TOKEN;
     const link = import.meta.env.VITE_GENERAL_LINK;
 
+    const currentWord = words[currentIndex];
+
     useEffect(() => {
-        fetchWords();
-    }, []);
+        if (currentWord) {
+            setOptions(generateOptions(words, currentWord.title));
+        }
+    }, [currentWord, words]);
 
     async function fetchWords() {
         try {
@@ -38,6 +44,10 @@ function OpdrachtGebaren() {
             console.error("Fout bij ophalen data:", err);
         }
     }
+
+    useEffect(() => {
+        fetchWords();
+    }, []);
 
     function loadWeekData(words) {
         const storedData = JSON.parse(localStorage.getItem("Opdracht1-GebaarNaarWoord")) || {};
@@ -81,7 +91,7 @@ function OpdrachtGebaren() {
         saveWeekData(updatedWeekData);
 
         setPopup(
-            <div className={`popup ${isCorrect ? "success" : "error"}`}>
+            <div className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"} popup ${isCorrect ? "success" : "error"} flex flex-col`}>
                 {isCorrect ? (
                     <>
                         <img src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" alt="Goed gedaan!" />
@@ -89,8 +99,8 @@ function OpdrachtGebaren() {
                     </>
                 ) : (
                     <>
-                        <p>Fout! Het juiste antwoord is:</p>
-                        <strong className="text-red-500">{correct}</strong>
+                        <p>Helaas! Het juiste antwoord is:</p>
+                        <strong className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-customRed"} text-xl`}>{correct}</strong>
                     </>
                 )}
                 <button onClick={handleNextWord} className="bg-customRed text-white px-4 py-2 rounded-lg mt-4">
@@ -101,8 +111,6 @@ function OpdrachtGebaren() {
     }
 
     if (words.length === 0) return <p>Laden...</p>;
-
-    const currentWord = words[currentIndex];
 
     return (
         <div className="mx-5">
@@ -128,14 +136,12 @@ function OpdrachtGebaren() {
                 </button>
             </div>
 
-            <div className="flex flex-wrap gap-4">
-                {generateOptions(words, currentWord?.title).map((option, index) => (
-                    <button key={index} onClick={() => handleButtonClick(option)}
-                            className="px-4 py-2 bg-white text-lg border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition">
-                        {option}
-                    </button>
-                ))}
-            </div>
+            {options.map((option, index) => (
+                <button key={index} onClick={() => handleButtonClick(option)}
+                        className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"} px-4 py-2 text-lg border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition`}>
+                    {option}
+                </button>
+            ))}
 
             {popup && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
