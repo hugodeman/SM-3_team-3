@@ -91,7 +91,7 @@ function OpdrachtGebaren() {
         saveWeekData(updatedWeekData);
 
         setPopup(
-            <div className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"} popup ${isCorrect ? "success" : "error"} flex flex-col`}>
+            <div className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-white text-black"} popup ${isCorrect ? "success" : "error"} flex flex-col`}>
                 {isCorrect ? (
                     <>
                         <img src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" alt="Goed gedaan!" />
@@ -100,7 +100,7 @@ function OpdrachtGebaren() {
                 ) : (
                     <>
                         <p>Helaas! Het juiste antwoord is:</p>
-                        <strong className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-customRed"} text-xl`}>{correct}</strong>
+                        <strong className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-white text-customRed"} text-xl`}>{correct}</strong>
                     </>
                 )}
                 <button onClick={handleNextWord} className="bg-customRed text-white px-4 py-2 rounded-lg mt-4">
@@ -118,14 +118,15 @@ function OpdrachtGebaren() {
             <h1 className="text-2xl font-bold">Oefening {currentIndex + 1} van {words.length}</h1>
             <p>Welk woord hoort bij dit gebaar?</p>
 
-            <video className="shadow-lg p-5 bg-gray-200 text-center mt-5" src={currentWord?.video_path} controls />
+            <video className={`${darkMode ? "bg-gray-700 bg-opacity-40 text-white" : "bg-gray-200"}shadow-lg p-5 text-center mt-5`} src={currentWord?.video_path} controls />
 
+            {/*submit*/}
             <div className="relative w-full">
                 <input
                     type="text"
                     value={inputValue}
                     readOnly
-                    className="my-10 py-4 text-lg text-center bg-white border-customRed border-4 rounded-bl-lg rounded-tl-lg rounded-tr-lg w-full"
+                    className={`${darkMode ? 'bg-gray-700 bg-opacity-30 text-white' : 'text-gray-900 bg-white'} my-10 py-4 text-lg text-center border-customRed border-4 rounded-bl-lg rounded-tl-lg rounded-tr-lg w-full`}
                 />
                 <button
                     onClick={handleSubmit}
@@ -136,16 +137,18 @@ function OpdrachtGebaren() {
                 </button>
             </div>
 
+            {/*antwoorden*/}
             {options.map((option, index) => (
                 <button key={index} onClick={() => handleButtonClick(option)}
-                        className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"} px-4 py-2 text-lg border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition`}>
+                        className={`${darkMode ? "bg-gray-700 bg-opacity-30 text-white" : "bg-white text-black"} px-4 py-2 mr-4 mb-4 text-lg border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition`}>
                     {option}
                 </button>
             ))}
 
+            {/*popup*/}
             {popup && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg text-center">{popup}</div>
+                    <div className={`${darkMode ? "bg-backgroundDarkMode text-white border-white border" : "bg-white text-black"} p-6 rounded-lg shadow-lg text-center`}>{popup}</div>
                 </div>
             )}
         </div>
