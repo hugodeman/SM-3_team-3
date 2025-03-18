@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import HrLogo from "../components/hrlogo.jsx";
 import HrlogoPause from "../components/hrlogo&pause.jsx";
+import { useDarkMode } from "../context/Darkmode.jsx";
 import NavbarMobile from "../components/navbar-mobile.jsx";
 
 const token = import.meta.env.VITE_BEARER_TOKEN;
 const link = import.meta.env.VITE_GENERAL_LINK;
 
 function ZinnenMaken() {
+    const { darkMode, toggleDarkMode } = useDarkMode();
     const [sentences, setSentences] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const { lessonId } = useParams();
@@ -106,7 +108,7 @@ function ZinnenMaken() {
     return (
         <>
             <HrlogoPause />
-            <div className="flex flex-col items-center min-h-screen bg-background p-4">
+            <div className={`flex flex-col items-center min-h-screen p-4 ${darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"}`}>
                 <div className="mt-4">
                     <span>{currentIndex + 1} van {sentences.length}</span>
                 </div>
