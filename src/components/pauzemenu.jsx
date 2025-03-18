@@ -9,7 +9,7 @@ function Pauzemenu() {
     };
 
     const handleStop = () => {
-        navigate('/vingerspel');
+        navigate('/');
     };
 
     return (
