@@ -13,6 +13,7 @@ import Woordenoverzicht from "./Woordenoverzicht.jsx";
 import OpdrachtGebaren from "./opdrachten/Opdracht.jsx";
 import Opdracht_2 from "./opdrachten/Opdracht-2.jsx";
 import ZinnenMaken from "./opdrachten/ZinnenMaken.jsx";
+import Progress from "./Progress.jsx";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <Profile />
+            },
+            {
+                path: "/progress",
+                element: <Progress />
             },
             {
                 path: "/lesstof",
