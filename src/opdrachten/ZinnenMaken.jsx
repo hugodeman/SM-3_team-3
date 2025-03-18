@@ -14,6 +14,7 @@ function ZinnenMaken() {
     const { lessonId } = useParams();
     const navigate = useNavigate();
     const [sentence, setSentence] = useState("");
+    const [popup, setPopup] = useState(null);
 
     async function fetchSentences() {
         try {
@@ -31,7 +32,6 @@ function ZinnenMaken() {
 
             const data = await res.json();
             setSentences(data);
-            console.log(data)
         } catch (err) {
             console.error("Fout bij ophalen data:", err);
         }
@@ -42,20 +42,57 @@ function ZinnenMaken() {
     }, [lessonId]);
 
     const handleCheck = () => {
-        console.log("Ingevoerde zin:", sentence);
+        const currentSentence = sentences[currentIndex].full_sentence;
+        console.log(currentSentence)
+        checkAnswer(sentence, currentSentence.correct_sentence, currentSentence.full_sentence);
     };
 
-    const currentSentence = sentences[currentIndex];
+    const handleNextWord = () => {
+        setPopup(null);
+        if (currentIndex < sentences.length - 1) {
+            setCurrentIndex(prevIndex => prevIndex + 1);
+            setSentence("");
+        } else {
+            navigate(`/les/${lessonId}`);
+        }
+    };
+
+    function checkAnswer(selected) {
+        const correct = sentences[currentIndex].full_sentence.trim().toLowerCase();
+
+        if (selected.trim().toLowerCase() === correct) {
+            setPopup(
+                <div className="popup success">
+                    <img src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" alt="Gefeliciteerd!" />
+                    <p>Goed gedaan!</p>
+                    <strong className="text-red-500">{sentences[currentIndex].full_sentence}</strong>
+                    <br/>
+                    <button onClick={handleNextWord} className="bg-customRed text-white px-4 py-2 rounded-lg mt-4">Volgende</button>
+                </div>
+            );
+        } else {
+            setPopup(
+                <div className="popup error">
+                    <p>Goed geprobeerd! Het juiste antwoord is:</p>
+                    <strong className="text-red-500">{sentences[currentIndex].full_sentence}</strong>
+                    <br/>
+                    <button onClick={handleNextWord}
+                            className="bg-customRed text-white px-4 py-2 rounded-lg mt-4">Volgende
+                    </button>
+                </div>
+            );
+        }
+    }
 
     return (
         <div className="flex flex-col items-center min-h-screen bg-background p-4">
-            <HrlogoPause />
+            <HrlogoPause/>
             <h1 className="text-2xl font-bold my-4">Zinnen Maken</h1>
 
             {/* Video Weergave */}
             <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden mb-4">
-                {currentSentence && (
-                    <video className="w-full" controls src={currentSentence.video_path} />
+                {sentences[currentIndex] && (
+                    <video className="w-full" controls src={sentences[currentIndex].video_path} />
                 )}
             </div>
 
@@ -75,6 +112,14 @@ function ZinnenMaken() {
             >
                 Controleer
             </button>
+
+            {popup && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-10 rounded-lg shadow-lg text-center max-w-lg w-full">
+                        {popup}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

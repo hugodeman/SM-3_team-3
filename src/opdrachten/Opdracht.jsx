@@ -82,7 +82,7 @@ function OpdrachtGebaren(){
         } else {
             setPopup(
                 <div className="popup error">
-                    <p>Fout! Het juiste antwoord is:</p>
+                    <p>Goed geprobeerd! Het juiste antwoord is:</p>
                     <strong className="text-red-500">{correct}</strong>
                     <button onClick={handleNextWord} className="bg-customRed text-white px-4 py-2 rounded-lg mt-4">Volgende</button>
                 </div>
