@@ -2,89 +2,83 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Fout from "../assets/Icons/Fout.png";
 import Goed from "../assets/Icons/Goed.png";
-import { useDarkMode } from '../context/Darkmode.jsx'; // Zorg ervoor dat je darkMode uit de context haalt
+import { useDarkMode } from '../context/Darkmode.jsx';
 
 function Opdracht_2() {
     const { lessonId } = useParams();
-    const { darkMode } = useDarkMode();  // Haal darkMode uit de context
+    const { darkMode } = useDarkMode();
     const [words, setWords] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
-    const [feedback, setFeedback] = useState(null); // Houdt bij of de gebruiker correct of incorrect heeft geantwoord
-    const [weekData, setWeekData] = useState({}); // Houdt de weekstatus bij (goed/fout per woord)
+    const [feedback, setFeedback] = useState(null);
+    const [weekData, setWeekData] = useState({});
 
     const token = import.meta.env.VITE_BEARER_TOKEN;
     const link = import.meta.env.VITE_GENERAL_LINK;
-
-    async function fetchWord() {
-        try {
-            const res = await fetch(`${link}/words?lesson_id=${lessonId}`, {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                },
-            });
-
-            if (!res.ok) {
-                throw new Error(`HTTP-fout! status: ${res.status}`);
-            }
-            const data = await res.json();
-            setWords(data);
-            loadWeekData(data);  // Laad de weekstatus wanneer de woorden geladen zijn
-        } catch (err) {
-            console.error("Fout bij ophalen data:", err);
-        }
-    }
 
     useEffect(() => {
         fetchWord();
     }, []);
 
-    // Laad de weekstatus uit localStorage
-    function loadWeekData(words) {
-        const week = `week_${lessonId}`;
-        const savedData = JSON.parse(localStorage.getItem(week)) || {};
+    function fetchWord() {
+        fetch(`${link}/words?lesson_id=${lessonId}`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setWords(data);
+                loadWeekData(data);
+            })
+            .catch(err => console.error("Fout bij ophalen data:", err));
+    }
 
-        // Vul de weekData met de bestaande gegevens, als die er zijn
-        const initialWeekData = words.reduce((acc, word, index) => {
-            acc[index] = savedData[index] || null; // null betekent dat het woord nog niet beantwoord is
+    function loadWeekData(words) {
+        const storedData = JSON.parse(localStorage.getItem("Opdracht2-WoordNaarGebaar")) || {};
+        const weekKey = `week_${lessonId}`;
+        const savedWeekData = storedData[weekKey] || {};
+
+        const initialWeekData = words.reduce((acc, word) => {
+            acc[word.title] = savedWeekData[word.title] ?? null;
             return acc;
         }, {});
 
         setWeekData(initialWeekData);
     }
 
-    // Opslaan van de weekstatus in localStorage
-    function saveWeekData() {
-        const week = `week_${lessonId}`;
-        localStorage.setItem(week, JSON.stringify(weekData));
+    function saveWeekData(updatedWeekData) {
+        const storedData = JSON.parse(localStorage.getItem("Opdracht2-WoordNaarGebaar")) || {};
+        const weekKey = `week_${lessonId}`;
+
+        storedData[weekKey] = updatedWeekData;
+        localStorage.setItem("Opdracht2-WoordNaarGebaar", JSON.stringify(storedData));
+
+        setWeekData(updatedWeekData);
     }
 
-    // Ga naar het vorige woord
+    const handleFeedback = (isCorrect) => {
+        const updatedWeekData = { ...weekData, [words[currentIndex]?.title]: isCorrect };
+        saveWeekData(updatedWeekData);
+        setFeedback(isCorrect);
+    };
+
     const previousWord = () => {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
             setShowAnswer(false);
-            setFeedback(null); // Reset feedback
+            setFeedback(null);
         }
     };
 
-    // Ga naar het volgende woord
     const nextWord = () => {
         if (currentIndex < words.length - 1) {
             setCurrentIndex(currentIndex + 1);
             setShowAnswer(false);
-            setFeedback(null); // Reset feedback
+            setFeedback(null);
         }
-    };
-
-    // Update de feedback en sla de gegevens op in localStorage
-    const handleFeedback = (isCorrect) => {
-        const updatedWeekData = { ...weekData, [currentIndex]: isCorrect };
-        setWeekData(updatedWeekData);
-        saveWeekData(); // Sla de nieuwe gegevens op in localStorage
-        setFeedback(isCorrect);
     };
 
     return (
@@ -101,7 +95,6 @@ function Opdracht_2() {
                     </p>
                 </div>
 
-                {/* Knoppen */}
                 <div className="flex gap-4 mt-4">
                     <button
                         className={`px-4 py-2 rounded-lg text-lg shadow-md transition 
@@ -126,7 +119,6 @@ function Opdracht_2() {
                     </button>
                 </div>
 
-                {/* Antwoord sectie met voorbeeld video */}
                 {showAnswer && (
                     <div className={`fixed bottom-0 left-0 w-full ${darkMode ? 'bg-gray-800' : 'bg-white'} p-4 shadow-xl border-t flex flex-col items-center`}>
                         <p className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>Voorbeeld Gebaar</p>
@@ -136,29 +128,25 @@ function Opdracht_2() {
                             src={words.length > 0 ? words[currentIndex]?.video_path : ""}
                         />
 
-                        {/* Feedback opties */}
                         <div className="flex gap-4 mt-4">
                             <button
-                                className={`w-16 h-16 rounded-full text-white text-2xl flex items-center justify-center 
-                                    ${feedback === true ? "bg-green-500 scale-110" : "bg-green-500 text-green-500 border-2 border-green-500 hover:bg-green-100"}`}
-                                onClick={() => handleFeedback(true)}
-                            >
+                                className={`w-16 h-16 rounded-full flex items-center justify-center 
+                                    ${feedback === true ? "bg-green-500 scale-110" : "bg-green-500 hover:bg-green-100"}`}
+                                onClick={() => handleFeedback(true)}>
                                 <img src={Goed} alt="Goed" />
                             </button>
 
                             <button
-                                className={`w-16 h-16 rounded-full text-white text-2xl flex items-center justify-center 
+                                className={`w-16 h-16 rounded-full flex items-center justify-center 
                                     ${feedback === false ? "bg-red-500 scale-110" : "bg-red-400 hover:bg-red-700"}`}
-                                onClick={() => handleFeedback(false)}
-                            >
+                                onClick={() => handleFeedback(false)}>
                                 <img src={Fout} alt="Fout" />
                             </button>
                         </div>
 
                         <button
                             className="mt-3 px-4 py-2 bg-customRed text-white rounded-lg hover:bg-customRedHover"
-                            onClick={() => setShowAnswer(false)}
-                        >
+                            onClick={() => setShowAnswer(false)}>
                             Sluiten
                         </button>
                     </div>
