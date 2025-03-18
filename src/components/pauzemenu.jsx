@@ -1,8 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useDarkMode} from "../context/Darkmode.jsx";
 
 function Pauzemenu() {
     const navigate = useNavigate();
+    const { darkMode } = useDarkMode();
 
     const handleResume = () => {
         navigate(-1);
@@ -27,7 +29,8 @@ function Pauzemenu() {
 
                 <button
                     onClick={handleStop}
-                    className="w-72 px-4 py-3 text-2xl font-bold cursor-pointer bg-white text-[#CF0245] border border-[#CF0245] rounded-lg"
+                    className={`${darkMode ? "bg-gray-700 bg-opacity-60 text-white" : "bg-white text-black"} w-72 px-4 py-3 text-2xl font-bold cursor-pointer text-[#CF0245] 
+                        border border-[#CF0245] rounded-lg`}
                 >
                     Stoppen
                 </button>
