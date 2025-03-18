@@ -4,14 +4,15 @@ import Navbar from "./components/navbar-mobile.jsx";
 import HrLogo from "./components/HrLogo";
 import trofee_0 from "./assets/Trophy/Trophy-0.png";
 import trofee_7 from "./assets/Trophy/Trophy-7.png";
-import mainPage from "./MainPage.jsx";
 
 function Profile() {
     const { darkMode, toggleDarkMode } = useDarkMode();
     const [userData, setUserData] = useState([]);
 
     const [user, setUser] = useState([])
-    const [formData, setFormData] = useState([])
+    const [formData, setFormData] = useState({
+        display_name: ''
+    });
 
     const test1 = trofee_0;
     const test2 = trofee_7;
@@ -19,7 +20,7 @@ function Profile() {
     const [token, setToken] = useState(localStorage.getItem("token") || "");
 
     console.log(token)
-    const link = import.meta.env.VITE_API_URL
+    const link = import.meta.env.VITE_GENERAL_LINK
     const bearerToken = import.meta.env.VITE_BEARER_TOKEN
 
     // API ophalen met useEffect
