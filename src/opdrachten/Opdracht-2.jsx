@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Fout from "../assets/Icons/Fout.png";
 import Goed from "../assets/Icons/Goed.png";
 import { useDarkMode } from '../context/Darkmode.jsx';
+import HrlogoPause from "../components/hrlogo&pause.jsx";
 
 function Opdracht_2() {
     const { lessonId } = useParams();
@@ -83,6 +84,7 @@ function Opdracht_2() {
 
     return (
         <div className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"} min-h-screen`}>
+            <HrlogoPause/>
             <div className="flex flex-col items-center justify-center p-4">
                 <h1 className={`text-3xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-black'}`}>Gebaar het woord</h1>
                 <h2 className={`text-lg ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>

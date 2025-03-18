@@ -88,7 +88,7 @@ function MainPage() {
 
                 {/* Vingerspel */}
                 <div className="flex flex-col items-center w-4/5">
-                    <img src="/vingerspel.jpg" alt="Vingerspel" className="w-44 h-44 rounded-lg shadow-md" />
+                    <img src="/vingerspel.png" alt="Vingerspel" className="w-44 h-44 rounded-lg shadow-md" />
                     <Link to="/vingerspel">
                         <button className="bg-customRed hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
                             Vingerspellen
