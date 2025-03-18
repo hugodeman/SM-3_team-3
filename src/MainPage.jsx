@@ -2,12 +2,12 @@ import React, {useEffect, useState} from "react";
 import {Link, useLocation} from "react-router-dom";
 import NavbarMobile from "./components/navbar-mobile.jsx";
 import { useDarkMode } from './context/Darkmode.jsx';
-import app from "./App.jsx";
 
 function MainPage() {
     const { darkMode, toggleDarkMode } = useDarkMode();
 
     const appUrl = import.meta.env.VITE_APP_URL;
+    const bearerToken = import.meta.env.VITE_BEARER_TOKEN
     const location = useLocation();
 
     const [user, setUser] = useState(null);
@@ -24,32 +24,32 @@ function MainPage() {
         }
     }, [location.search]);
 
-    // useEffect(() => {
-    //     if (token) {
-    //         fetch(`http://145.24.223.169/api/auth/users?token=${token}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Accept: "application/json",
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         })
-    //             .then((res) => res.json())
-    //             .then((data) => setUser(data))
-    //             .catch(() => setUser(null));
-    //     }
-    // }, [token]);
+    useEffect(() => {
+        if (token) {
+            fetch(`http://145.24.223.169/api/v1/users?token=${token}`, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${bearerToken}`,
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => setUser(data))
+                .catch(() => setUser(null));
+        }
+    }, [token]);
 
     const removeToken = () => {
         localStorage.removeItem("token")
     }
 
-    // console.log(user)
+    console.log(user)
 
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black min-h-screen flex flex-col justify-between pb-24"}>
             <div>
                 {!token ? (
-                <a href={`https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.169/api/auth/redirect-back-url/${appUrl}/`}
+                <a href={`https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.169/api/auth/redirect-back-url/${appUrl}`}
                    className="bg-customRed text-white ml-5 px-6 py-3 rounded-lg hover:bg-customRedHover transition"
                 >
                     Inloggen
