@@ -27,15 +27,15 @@ const router = createBrowserRouter([
                 element: <Vingerspelmenu />
             },
             {
-                path: "/vingerspel/nieuweletter/:letter",
+                path: "/vingerspel/nieuweletter/:id",
                 element: <Vingerspelnieuweletter />
             },
             {
-                path: "/vingerspel/herhaling/:letter",
+                path: "/vingerspel/herhaling/:id",
                 element: <Vingerspelherhaling />
             },
             {
-                path: "/vingerspel/controle/:letter",
+                path: "/vingerspel/controle/:id",
                 element: <Vingerspelcontrole />
             },
             {
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 element: <Profile />
             },
             {
-                path: '/lesstof',
+                path: "/lesstof",
                 element: <Lesstof/>
             },
             {
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
                 element: <Les/>
             },
             {
-                path: '/opdracht1/:lessonId',
+                path: "/opdracht1/:lessonId",
                 element: <OpdrachtGebaren/>
             },
             {
@@ -62,9 +62,8 @@ const router = createBrowserRouter([
                 path: '/opdracht3/:lessonId',
                 element: <ZinnenMaken/>
             },
-            // path: "/lesstof/woordenoverzicht/:lessonId"
             {
-                path: "/lesstof/week1/woordenoverzicht",
+                path: "woordenoverzicht/:lessonId",
                 element: <Woordenoverzicht/>
             },
             {
