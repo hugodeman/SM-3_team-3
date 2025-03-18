@@ -8,17 +8,28 @@ import trofee_7 from "./assets/Trophy/Trophy-7.png";
 function Profile() {
     const { darkMode, toggleDarkMode } = useDarkMode();
     const [userData, setUserData] = useState([]);
+
+    const [user, setUser] = useState([])
+    const [formData, setFormData] = useState({
+        display_name: ''
+    });
+
     const test1 = trofee_0;
     const test2 = trofee_7;
 
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
+
+    console.log(token)
+    const link = import.meta.env.VITE_GENERAL_LINK
+    const bearerToken = import.meta.env.VITE_BEARER_TOKEN
 
     // API ophalen met useEffect
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/badges`, {
+                const response = await fetch(`${link}/badges`, {
                     headers: {
-                        "Authorization": `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+                        "Authorization": `Bearer ${bearerToken}`,
                         "Content-Type": "application/json"
                     }
                 });
@@ -38,13 +49,99 @@ function Profile() {
         fetchData();
     }, []);
 
+    async function fetchUser() {
+        try {
+            const response = await fetch(`http://145.24.223.169/api/v1/users?token=${token}`,{
+                method: "GET",
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${bearerToken}`,
+                }
+            });
+
+            const data = await response.json();
+            console.log(data)
+            
+            setUser(data)
+            // placeholders
+            setFormData({
+                display_name: data.display_name || ''
+            });
+        } catch (error) {
+            console.error('Fout bij het ophalen van het product:', error);
+        }
+    }
+
+    useEffect(() => {
+        fetchUser()
+    },[])
+
+    async function updateName() {
+        try {
+            const response = await fetch(`http://145.24.223.169/api/v1/users?token=${token}`, {
+                method: 'PATCH',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${bearerToken}`,
+                },
+                body: JSON.stringify({
+                    display_name: formData.display_name, // Stuur de gewijzigde naam
+                }),
+            });
+
+            const data = await response.json();
+            console.log('Favorite updated:', data);
+
+            // update state van vorige data
+            setUser(prevUser => ({
+                ...prevUser,
+                display_name: data.display_name
+            }));
+
+        } catch (error) {
+            console.error('Error updating favorite status:', error);
+        }
+    }
+
+    // useEffect(() => {
+    //     updateName()
+    // },[])
+
+    const handleInputChange = (event) => {
+        const {name, value} = event.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log('Formulier verzonden:', formData);
+
+        await updateName()
+    };
+
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"}>
             <HrLogo />
             <section id="profile-container" className="p-4">
-                <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Profile</h1>
-                <h2 className={`text-lg ${darkMode ? 'text-gray-400' : 'text-gray-800'}`}>Welkom gebruiker</h2>
+                <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Profiel</h1>
+                <h2 className={`text-lg ${darkMode ? 'text-gray-400' : 'text-gray-800'}`}>{user.full_name}</h2>
 
+                <form onSubmit={handleSubmit} >
+                    <div>
+                        <label htmlFor="name" className="">Pas gebruikersnaam aan:</label>
+                        <input type="text" name="display_name" id="display_name" value={formData.display_name} onChange={handleInputChange}
+                               className={`${darkMode ? 'text-white bg-gray-800 bg-opacity-30' : 'text-white'}px-4 py-2 text-lg text-center border-customRed border-2 rounded-bl-lg rounded-tl-lg rounded-tr-lg hover:bg-customRed transition`}
+                        />
+                    </div>
+                    <button type={"submit"}
+                            className="my-10 py-2 text-lg text-center text-white bg-customRed border-customRed border-4 rounded-bl-lg rounded-tl-lg rounded-tr-lg w-1/2"
+                    >Update</button>
+                </form>
+                
                 {/* Darkmode Toggle */}
                 <label className="inline-flex items-center cursor-pointer my-4">
                     <input
