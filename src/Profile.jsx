@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDarkMode } from './context/Darkmode.jsx'; // Zorg ervoor dat je darkMode context goed is ingesteld
 import Navbar from "./components/navbar-mobile.jsx";
-import HrLogo from "./components/HrLogo";
+import HrLogo from "./components/hrlogo.jsx";
 
 // Trofee-afbeeldingen importeren
 import trofee_0 from "./assets/Trophy/Trophy-0.png";
