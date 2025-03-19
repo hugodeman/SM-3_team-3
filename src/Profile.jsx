@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDarkMode } from './context/Darkmode.jsx';
+import { useDarkMode } from './context/Darkmode.jsx'; // Zorg ervoor dat je darkMode context goed is ingesteld
 import Navbar from "./components/navbar-mobile.jsx";
 import HrLogo from "./components/HrLogo";
 
@@ -17,7 +17,7 @@ import trofee_7 from "./assets/Trophy/Trophy-7.png";
 const trofeeImages = [trofee_0, trofee_1, trofee_2, trofee_3, trofee_4, trofee_5, trofee_6, trofee_7];
 
 function Profile() {
-    const { darkMode } = useDarkMode();
+    const { darkMode, toggleDarkMode } = useDarkMode(); // Gebruik darkMode uit context en toggleDarkMode functie
     const [user, setUser] = useState({});
     const [formData, setFormData] = useState({ display_name: '' });
     const [progressData, setProgressData] = useState([]);
@@ -133,6 +133,27 @@ function Profile() {
                         Update
                     </button>
                 </form>
+
+                {/* Dark Mode Switch - Aan de linker kant onder de update knop */}
+                <div className="flex items-center mt-6">
+                    <label htmlFor="darkModeToggle" className="flex items-center cursor-pointer">
+                        <div className="relative">
+                            <input
+                                type="checkbox"
+                                id="darkModeToggle"
+                                className="sr-only"
+                                checked={darkMode}
+                                onChange={toggleDarkMode}
+                            />
+                            <div className={`block w-14 h-8 rounded-full ${darkMode ? 'bg-customRed' : 'bg-gray-300'}`}></div>
+                            <div
+                                className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-300 ${darkMode ? 'translate-x-full bg-white' : ''}`}
+                            ></div>
+                        </div>
+                        <span className="ml-3 text-lg">Dark Mode</span>
+                    </label>
+                </div>
+
 
                 <p className="text-lg font-semibold mt-4">Trofeeën:</p>
                 <div className="grid grid-cols-3 gap-6 mt-6">
