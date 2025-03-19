@@ -1,97 +1,176 @@
 import React, { useEffect, useState } from "react";
-import { useDarkMode } from './context/Darkmode.jsx';
+import { useDarkMode } from './context/Darkmode.jsx'; // Zorg ervoor dat je darkMode context goed is ingesteld
 import Navbar from "./components/navbar-mobile.jsx";
-import HrLogo from "./components/hrlogo.jsx";
+import HrLogo from "./components/HrLogo";
+
+// Trofee-afbeeldingen importeren
 import trofee_0 from "./assets/Trophy/Trophy-0.png";
+import trofee_1 from "./assets/Trophy/Trophy-1.png";
+import trofee_2 from "./assets/Trophy/Trophy-2.png";
+import trofee_3 from "./assets/Trophy/Trophy-3.png";
+import trofee_4 from "./assets/Trophy/Trophy-4.png";
+import trofee_5 from "./assets/Trophy/Trophy-5.png";
+import trofee_6 from "./assets/Trophy/Trophy-6.png";
 import trofee_7 from "./assets/Trophy/Trophy-7.png";
 
+// Array met trofee-afbeeldingen
+const trofeeImages = [trofee_0, trofee_1, trofee_2, trofee_3, trofee_4, trofee_5, trofee_6, trofee_7];
+
 function Profile() {
-    const { darkMode, toggleDarkMode } = useDarkMode();
-    const [userData, setUserData] = useState([]);
-    const test1 = trofee_0;
-    const test2 = trofee_7;
+    const { darkMode, toggleDarkMode } = useDarkMode(); // Gebruik darkMode uit context en toggleDarkMode functie
+    const [user, setUser] = useState({});
+    const [formData, setFormData] = useState({ display_name: '' });
+    const [progressData, setProgressData] = useState([]);
 
+    const token = localStorage.getItem("token") || "";
+    const link = import.meta.env.VITE_GENERAL_LINK;
+    const bearerToken = import.meta.env.VITE_BEARER_TOKEN;
 
-    // API ophalen met useEffect
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchUser = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/badges`, {
+                const response = await fetch(`http://145.24.223.169/api/v1/users?token=${token}`, {
+                    method: "GET",
                     headers: {
-                        "Authorization": `Bearer ${import.meta.env.VITE_API_TOKEN}`,
-                        "Content-Type": "application/json"
+                        Accept: 'application/json',
+                        Authorization: `Bearer ${bearerToken}`,
                     }
                 });
 
-                if (!response.ok) {
-                    throw new Error("Fout bij ophalen van data");
-                }
-
                 const data = await response.json();
-                console.log("📌 API Data:", data); // Log de data in de console
-                setUserData(data);
+                setUser(data);
+                setFormData({ display_name: data.display_name || '' });
             } catch (error) {
-                console.error("❌ Fout bij ophalen API:", error);
+                console.error('Fout bij het ophalen van gebruiker:', error);
             }
         };
 
-        fetchData();
+        fetchUser();
     }, []);
+
+    const fetchProgress = () => {
+        const opdracht1 = JSON.parse(localStorage.getItem("Opdracht1-GebaarNaarWoord")) || {};
+        const opdracht2 = JSON.parse(localStorage.getItem("Opdracht2-WoordNaarGebaar")) || {};
+        const opdracht3 = JSON.parse(localStorage.getItem("Opdracht3-ZinnenMaken")) || [];
+
+        const weeks = [...Array(7).keys()].map(i => `week_${i + 1}`);
+
+        const progress = weeks.map(week => ({
+            week,
+            opdracht1: opdracht1[week] || {},
+            opdracht2: opdracht2[week] || {},
+            opdracht3: opdracht3.filter(sentence => sentence.week === week),
+        }));
+
+        setProgressData(progress);
+    };
+
+    useEffect(() => {
+        fetchProgress();
+    }, []);
+
+    const updateName = async () => {
+        try {
+            const response = await fetch(`http://145.24.223.169/api/v1/users?token=${token}`, {
+                method: 'PATCH',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${bearerToken}`,
+                },
+                body: JSON.stringify({ display_name: formData.display_name }),
+            });
+
+            const data = await response.json();
+            setUser(prevUser => ({ ...prevUser, display_name: data.display_name }));
+        } catch (error) {
+            console.error('Error updating username:', error);
+        }
+    };
+
+    const handleInputChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        await updateName();
+    };
+
+    // Controleert of een week volledig is voltooid
+    const checkForTrophy = (weekData) => {
+        if (!weekData) return false;
+        const { opdracht1, opdracht2, opdracht3 } = weekData;
+
+        const isCorrect = (opdracht) => Object.values(opdracht).every(value => value === true);
+        const isCorrectOpdracht3 = opdracht3.every(item => item.status === true);
+
+        return isCorrect(opdracht1) && isCorrect(opdracht2) && isCorrectOpdracht3;
+    };
 
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black"}>
             <HrLogo />
             <section id="profile-container" className="p-4">
-                <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Profile</h1>
-                <h2 className={`text-lg ${darkMode ? 'text-gray-400' : 'text-gray-800'}`}>Welkom gebruiker</h2>
+                <h1 className="text-2xl font-bold">Profiel</h1>
+                <h2 className="text-lg">{user.full_name}</h2>
 
-                {/* Darkmode Toggle */}
-                <label className="inline-flex items-center cursor-pointer my-4">
-                    <input
-                        type="checkbox"
-                        checked={darkMode}
-                        onChange={toggleDarkMode}
-                        className="sr-only peer"
-                    />
-                    <span className={`ms-3 text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Darkmode</span>
-                    <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-customRed dark:peer-checked:bg-customRed"></div>
-                </label>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="display_name">Pas gebruikersnaam aan:</label>
+                        <input
+                            type="text"
+                            name="display_name"
+                            id="display_name"
+                            value={formData.display_name}
+                            onChange={handleInputChange}
+                            className={`px-4 py-2 text-lg text-center border-customRed border-2 rounded-lg 
+                                ${darkMode ? 'text-white bg-gray-800 bg-opacity-30' : 'text-black'}`}
+                        />
+                    </div>
+                    <button type="submit"
+                            className="my-10 py-2 text-lg text-white bg-customRed border-customRed border-4 rounded-lg w-1/2">
+                        Update
+                    </button>
+                </form>
 
-                {/* Trofeeën Sectie */}
-                <p className={`text-lg font-semibold mt-4 ${darkMode ? 'text-white' : 'text-black'}`}>Trofeeën:</p>
-                <div className="grid grid-cols-3 gap-6 mt-6">
-                    {userData.length > 0 ? (
-                        userData.map((trofee) => (
+                {/* Dark Mode Switch - Aan de linker kant onder de update knop */}
+                <div className="flex items-center mt-6">
+                    <label htmlFor="darkModeToggle" className="flex items-center cursor-pointer">
+                        <div className="relative">
+                            <input
+                                type="checkbox"
+                                id="darkModeToggle"
+                                className="sr-only"
+                                checked={darkMode}
+                                onChange={toggleDarkMode}
+                            />
+                            <div className={`block w-14 h-8 rounded-full ${darkMode ? 'bg-customRed' : 'bg-gray-300'}`}></div>
                             <div
-                                key={trofee.id}
-                                className={`p-4 rounded-2xl shadow-xl flex flex-col items-center justify-center transition-transform hover:scale-105 border-2 text-center ${
-                                    darkMode ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-800"}`}>
-                                <img src={`${trofee.image_url}`} alt={trofee.title} className="w-20 h-20 object-contain drop-shadow-md mb-2"/>
-                                <p className="text-sm">Voltooi de toets van week {trofee.required_score+1}.</p>
+                                className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-300 ${darkMode ? 'translate-x-full bg-white' : ''}`}
+                            ></div>
+                        </div>
+                        <span className="ml-3 text-lg">Dark Mode</span>
+                    </label>
+                </div>
+
+
+                <p className="text-lg font-semibold mt-4">Trofeeën:</p>
+                <div className="grid grid-cols-3 gap-6 mt-6">
+                    {progressData.map((weekData, index) => {
+                        const hasTrophy = checkForTrophy(weekData);
+                        const trophyImage = hasTrophy ? trofeeImages[index + 1] : trofee_0;
+
+                        return (
+                            <div key={index} className={`p-4 rounded-2xl shadow-xl flex flex-col items-center justify-center transition-transform hover:scale-105 border-2 text-center 
+                                ${hasTrophy ? (darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-300") : (darkMode ? "bg-gray-600 border-gray-500" : "bg-gray-300 border-gray-400")}`}>
+                                <img src={trophyImage} alt={`Trophy week ${index + 1}`} className="w-20 h-20 object-contain drop-shadow-md mb-2"/>
+                                <p className="text-sm">{hasTrophy ? `Trofee voor Week ${index + 1}` : `Nog te verdienen voor Week ${index + 1}`}</p>
                             </div>
-                        ))
-                    ) : (
-                        <p>Geen trofeeën beschikbaar...</p>
-                    )}
+                        );
+                    })}
                 </div>
             </section>
-
-            <div className="grid grid-cols-3 gap-6 mt-6">
-                {/* Trofee die je nog moet verdienen (bijvoorbeeld test1) */}
-                <div
-                    className={`p-4 rounded-2xl shadow-xl flex flex-col items-center justify-center transition-transform hover:scale-105 border-2 text-center ${
-                        darkMode
-                            ? "bg-gray-600 border-gray-500 text-white" // Grijs voor niet-verdiende trofee
-                            : "bg-gray-300 border-gray-400 text-gray-800"
-                    }`}>
-                    <img src={test1} alt="test img" className="w-20 h-20 object-contain drop-shadow-md mb-2"/>
-                    <p className="text-sm">Voltooi de toets van week.</p>
-                </div>
-
-                {/* Verdiende trofee (bijvoorbeeld test2) */}
-
-            </div>
-
             <Navbar />
         </div>
     );

@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Link, useLocation} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import NavbarMobile from "./components/navbar-mobile.jsx";
 import { useDarkMode } from './context/Darkmode.jsx';
-import app from "./App.jsx";
 
 function MainPage() {
-    const { darkMode, toggleDarkMode } = useDarkMode();
+    const { darkMode } = useDarkMode();
 
     const appUrl = import.meta.env.VITE_APP_URL;
+    const bearerToken = import.meta.env.VITE_BEARER_TOKEN;
     const location = useLocation();
 
     const [user, setUser] = useState(null);
@@ -16,7 +16,6 @@ function MainPage() {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const newToken = params.get("sso_token");
-        console.log(newToken)
 
         if (newToken) {
             localStorage.setItem("token", newToken);
@@ -24,50 +23,55 @@ function MainPage() {
         }
     }, [location.search]);
 
-    // useEffect(() => {
-    //     if (token) {
-    //         fetch(`http://145.24.223.169/api/auth/users?token=${token}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Accept: "application/json",
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         })
-    //             .then((res) => res.json())
-    //             .then((data) => setUser(data))
-    //             .catch(() => setUser(null));
-    //     }
-    // }, [token]);
+    useEffect(() => {
+        if (!token) {
+            window.location.href = `https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.169/api/auth/redirect-back-url/${appUrl}`;
+        } else {
+            fetch(`http://145.24.223.169/api/v1/users?token=${token}`, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${bearerToken}`,
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => setUser(data))
+                .catch(() => setUser(null));
+        }
+    }, [token]);
 
     const removeToken = () => {
-        localStorage.removeItem("token")
-    }
-
-    // console.log(user)
+        localStorage.removeItem("token");
+    };
 
     return (
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black min-h-screen flex flex-col justify-between pb-24"}>
             <div>
-                {!token ? (
-                <a href={`https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.169/api/auth/redirect-back-url/${appUrl}/`}
-                   className="bg-customRed text-white ml-5 px-6 py-3 rounded-lg hover:bg-customRedHover transition"
-                >
-                    Inloggen
-                </a>
+                {token && (
+                    <a href={`http://cmgt.hr.nl/chat-login/logout/${token}?redirect=http://${appUrl}`}
+                       onClick={removeToken}
+                       className="bg-customRed text-white ml-5 px-6 py-3 rounded-lg hover:bg-customRedHover transition">
+                        Uitloggen
+                    </a>
+                )}
 
-                ):(
-                <a href={`http://cmgt.hr.nl/chat-login/logout/${token}?redirect=http://${appUrl}`}
-                   onClick={removeToken}
-                   className="bg-customRed text-white ml-5 px-6 py-3 rounded-lg hover:bg-customRedHover transition"
-                >
-                    Uitloggen
-                </a>
-                    )}
+                 {/*Admin Dashboard-knop */}
+                {user && user.role === 'admin' && (
+                    <Link to="/admin">
+                        <button className="bg-blue-600 hover:bg-blue-700 text-white ml-5 px-6 py-3 rounded-lg transition">
+                            Admin Dashboard
+                        </button>
+                    </Link>
+                )}
             </div>
 
             {/* Welkomsttekst */}
             <div className="p-6 relative">
-                <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom Jan</h1>
+                {user ? (
+                    <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom, {user.display_name}</h1>
+                ) : (
+                    <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-black'}`}>Welkom, Gebruiker</h1>
+                )}
                 <p className={`text-lg mt-2 max-w-xs ${darkMode ? 'text-gray-300' : 'text-black'}`}>
                     Alles wat je nodig hebt voor jouw Nederlandse gebarentaalavontuur, op één plek.
                     Leer vingerspellen, bouw zinnen en volg je vooruitgang met onze interactieve lesstof.
@@ -80,7 +84,7 @@ function MainPage() {
                 <div className="flex flex-col items-center w-4/5">
                     <img src="/lesstof.jpg" alt="Lesstof" className="w-44 h-44 rounded-lg shadow-md" />
                     <Link to="/lesstof">
-                        <button className="bg-customRed  hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
+                        <button className="bg-customRed hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
                             Lesstof
                         </button>
                     </Link>
@@ -88,7 +92,7 @@ function MainPage() {
 
                 {/* Vingerspel */}
                 <div className="flex flex-col items-center w-4/5">
-                    <img src="/vingerspel.jpg" alt="Vingerspel" className="w-44 h-44 rounded-lg shadow-md" />
+                    <img src="/vingerspel.png" alt="Vingerspel" className="w-44 h-44 rounded-lg shadow-md" />
                     <Link to="/vingerspel">
                         <button className="bg-customRed hover:bg-customRedHover text-white font-bold py-4 w-44 rounded-2xl text-xl mt-4">
                             Vingerspellen

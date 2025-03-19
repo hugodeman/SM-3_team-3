@@ -12,7 +12,7 @@ const NavbarMobile = () => {
             <nav className="bg-customRed p-4 text-white fixed bottom-0 rounded-t-2xl w-full">
                 <div className="flex justify-around items-center">
                     <a href={'/'}> <img src={Home} alt="Home" className="w-12 h-12"/></a>
-                    <img src={Progress} alt="Progress" className="w-12 h-12" />
+                    <a href={'progress'}><img src={Progress} alt="Progress" className="w-12 h-12" /></a>
                     <a href={'/profile'}> <img src={Profile} alt="Profile" className="w-12 h-12" /> </a>
                 </div>
             </nav>

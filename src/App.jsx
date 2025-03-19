@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoute from "./components/protectedRoute.jsx";
 import Layout from "./Layout.jsx";
 import Vingerspelmenu from "./Vingerspelmenu.jsx";
 import Profile from "./Profile.jsx";
@@ -13,6 +14,9 @@ import Woordenoverzicht from "./Woordenoverzicht.jsx";
 import OpdrachtGebaren from "./opdrachten/Opdracht.jsx";
 import Opdracht_2 from "./opdrachten/Opdracht-2.jsx";
 import ZinnenMaken from "./opdrachten/ZinnenMaken.jsx";
+import Progress from "./Progress.jsx";
+import AdminRouteProtection from "./components/AdminRouteProtection.jsx";
+import AdminPanel from "./AdminPanel.jsx";
 
 const router = createBrowserRouter([
     {
@@ -23,63 +27,127 @@ const router = createBrowserRouter([
                 element: <MainPage />
             },
             {
+                path: "/admin",
+                element: (
+                    <AdminRouteProtection>
+                        <AdminPanel/>
+                    </AdminRouteProtection>
+                )
+            },
+            {
                 path: "/vingerspel",
-                element: <Vingerspelmenu />
+                element: (
+                    <ProtectedRoute>
+                        <Vingerspelmenu />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/vingerspel/nieuweletter/:id",
-                element: <Vingerspelnieuweletter />
+                element: (
+                    <ProtectedRoute>
+                        <Vingerspelnieuweletter />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/vingerspel/herhaling/:id",
-                element: <Vingerspelherhaling />
+                element: (
+                    <ProtectedRoute>
+                        <Vingerspelherhaling />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/vingerspel/controle/:id",
-                element: <Vingerspelcontrole />
+                element: (
+                    <ProtectedRoute>
+                        <Vingerspelcontrole />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/profile",
-                element: <Profile />
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                )
+            },
+            {
+                path: "/progress",
+                element: (
+                    <ProtectedRoute>
+                        <Progress />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/lesstof",
-                element: <Lesstof/>
+                element: (
+                    <ProtectedRoute>
+                        <Lesstof />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/les/:lessonId",
-                element: <Les/>
+                element: (
+                    <ProtectedRoute>
+                        <Les />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/opdracht1/:lessonId",
-                element: <OpdrachtGebaren/>
+                element: (
+                    <ProtectedRoute>
+                        <OpdrachtGebaren />
+                    </ProtectedRoute>
+                )
             },
             {
-                path: '/opdracht2/:lessonId',
-                element: <Opdracht_2/>
+                path: "/opdracht2/:lessonId",
+                element: (
+                    <ProtectedRoute>
+                        <Opdracht_2 />
+                    </ProtectedRoute>
+                )
             },
             {
-                path: '/opdracht3/:lessonId',
-                element: <ZinnenMaken/>
+                path: "/opdracht3/:lessonId",
+                element: (
+                    <ProtectedRoute>
+                        <ZinnenMaken />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "woordenoverzicht/:lessonId",
-                element: <Woordenoverzicht/>
+                element: (
+                    <ProtectedRoute>
+                        <Woordenoverzicht />
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/pauze",
-                element: <Pauzemenu />
+                element: (
+                    <ProtectedRoute>
+                        <Pauzemenu />
+                    </ProtectedRoute>
+                )
             }
         ]
     }
 ]);
 
 function App() {
-  return (
-    <>
-        <RouterProvider router={router} />
-    </>
-  )
+    return (
+        <>
+            <RouterProvider router={router} />
+        </>
+    );
 }
 
 export default App;
