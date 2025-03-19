@@ -1,6 +1,7 @@
 // src/components/HrLogo.jsx
 import React from "react";
 import { useDarkMode } from '../context/Darkmode.jsx';
+import hrLogo from '../assets/Logo/HR-Logo-200px.png';
 
 const HrLogo = () => {
     const { darkMode } = useDarkMode();
@@ -9,7 +10,7 @@ const HrLogo = () => {
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background"}>
             <img
                 className="absolute right-0 top-0 m-4 max-w-16"
-                src="../src/assets/Logo/HR-Logo-200px.png"
+                src={hrLogo}
                 alt="HR Logo"
             />
         </div>
