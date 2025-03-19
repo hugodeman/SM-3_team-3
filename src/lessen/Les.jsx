@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import Buttons from "../components/buttons.jsx";
 import HrLogo from "../components/hrlogo.jsx";
+import backarrow from "../assets/Icons/Back-arrow.png"
 
 function Les() {
     const {lessonId} = useParams();
@@ -56,7 +57,7 @@ function Les() {
     return (
         <>
             <button onClick={() => navigate("/lesstof")} aria-label="Go Back" className="absolute top-9 left-4">
-                <img src="/src/assets/Icons/Back arrow.png" alt="Back Arrow Icon" className="h-6 w-auto"/>
+                <img src={backarrow} alt="Back Arrow Icon" className="h-6 w-auto"/>
             </button>
             <HrLogo/>
             <div className={'mr-5 ml-5'}>

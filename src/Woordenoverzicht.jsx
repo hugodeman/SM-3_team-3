@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useParams} from 'react-router-dom';
 import { useDarkMode } from './context/Darkmode.jsx';
+import backarrow from '../src/assets/Icons/Back-arrow.png'
 
 function Woordenoverzicht() {
     const [activePopUp, setActivePopUp] = useState(null);
@@ -45,7 +46,7 @@ function Woordenoverzicht() {
                 className="absolute top-9 left-4"
             >
                 <img
-                    src="/src/assets/Icons/Back arrow.png"
+                    src={backarrow}
                     alt="Back Arrow Icon"
                     className="h-6 w-auto"
                 />
