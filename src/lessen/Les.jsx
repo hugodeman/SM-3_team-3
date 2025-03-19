@@ -3,9 +3,6 @@ import {useParams, useNavigate} from "react-router-dom";
 import Buttons from "../components/buttons.jsx";
 import HrLogo from "../components/hrlogo.jsx";
 
-const link = import.meta.env.VITE_GENERAL_LINK;
-const token = import.meta.env.VITE_BEARER_TOKEN;
-
 function Les() {
     const {lessonId} = useParams();
     const navigate = useNavigate();
@@ -17,10 +14,10 @@ function Les() {
     });
 
     useEffect(() => {
-        fetch(`${link}/words?lesson_id=${lessonId}`, {
+        fetch(`http://145.24.223.169/api/v1/words?lesson_id=${lessonId}`, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
                 "Content-Type": "application/json"
             }
         })

@@ -4,9 +4,8 @@ import {useDarkMode} from "./context/Darkmode.jsx";
 function AdminPanel (){
     const darkMode = useDarkMode()
     const token = localStorage.getItem('token')
-    const link = import.meta.env.VITE_GENERAL_LINK
-    const appUrl = import.meta.env.VITE_APP_URL;
-    const bearerToken = import.meta.env.VITE_BEARER_TOKEN;
+    const link = "145.24.223.153/api/v1"
+    const appUrl = "145.24.223.153";
     const [studentToken, setStudentToken] = useState()
 
     const removeToken = () => {
@@ -27,11 +26,11 @@ function AdminPanel (){
 
     async function inviteStudents(user) {
         try {
-            const response = await fetch(`${link}/allowed-users`, {
+            const response = await fetch(`http://145.24.223.169/api/v1/allowed-users`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
-                    Authorization: `Bearer ${bearerToken}`,
+                    Authorization: `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ emails: user.email })
@@ -75,7 +74,7 @@ function AdminPanel (){
                        className="bg-customRed hover:bg-customRedHover py-4 px-10 font-bold text-white text-center rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl w-1/4">
                         Home
                     </a>
-                    <a href={`http://cmgt.hr.nl/chat-login/logout/${token}?redirect=http://${appUrl}`}
+                    <a href={`http://cmgt.hr.nl/chat-login/logout/${token}?redirect=http://145.24.223.153`}
                        onClick={removeToken}
                        className="bg-customRed hover:bg-customRedHover py-4 px-10 font-bold text-white text-center rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl w-1/4">
                         Uitloggen

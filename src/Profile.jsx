@@ -23,8 +23,6 @@ function Profile() {
     const [progressData, setProgressData] = useState([]);
 
     const token = localStorage.getItem("token") || "";
-    const link = import.meta.env.VITE_GENERAL_LINK;
-    const bearerToken = import.meta.env.VITE_BEARER_TOKEN;
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -33,7 +31,7 @@ function Profile() {
                     method: "GET",
                     headers: {
                         Accept: 'application/json',
-                        Authorization: `Bearer ${bearerToken}`,
+                        Authorization: `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
                     }
                 });
 

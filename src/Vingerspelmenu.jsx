@@ -10,8 +10,6 @@ function Vingerspelmenu() {
     const [letters, setLetters] = useState([]);
     const [selectedLetter, setSelectedLetter] = useState(null);
 
-    const token = import.meta.env.VITE_BEARER_TOKEN;
-    const link = import.meta.env.VITE_GENERAL_LINK;
 
     useEffect(() => {
         fetchLetters();
@@ -19,11 +17,11 @@ function Vingerspelmenu() {
 
     async function fetchLetters() {
         try {
-            const response = await fetch(`${link}/alphabet-letters`, {
+            const response = await fetch(`http://145.24.223.169/api/v1/alphabet-letters`, {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
                 },
             });
             const data = await response.json();

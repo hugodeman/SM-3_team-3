@@ -6,8 +6,6 @@ import { useDarkMode } from './context/Darkmode.jsx';
 function MainPage() {
     const { darkMode } = useDarkMode();
 
-    const appUrl = import.meta.env.VITE_APP_URL;
-    const bearerToken = import.meta.env.VITE_BEARER_TOKEN;
     const location = useLocation();
 
     const [user, setUser] = useState(null);
@@ -25,13 +23,13 @@ function MainPage() {
 
     useEffect(() => {
         if (!token) {
-            window.location.href = `https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.169/api/auth/redirect-back-url/${appUrl}`;
+            window.location.href = `https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.169/api/auth/redirect-back-url/145.24.223.153`;
         } else {
             fetch(`http://145.24.223.169/api/v1/users?token=${token}`, {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
-                    Authorization: `Bearer ${bearerToken}`,
+                    Authorization: `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
                 },
             })
                 .then((res) => res.json())
@@ -48,7 +46,7 @@ function MainPage() {
         <div className={darkMode ? "bg-backgroundDarkMode text-white" : "bg-background text-black min-h-screen flex flex-col justify-between pb-24"}>
             <div>
                 {token && (
-                    <a href={`http://cmgt.hr.nl/chat-login/logout/${token}?redirect=http://${appUrl}`}
+                    <a href={`http://cmgt.hr.nl/chat-login/logout/${token}?redirect=http://145.24.223.153`}
                        onClick={removeToken}
                        className="bg-customRed text-white ml-5 px-6 py-3 rounded-lg hover:bg-customRedHover transition">
                         Uitloggen

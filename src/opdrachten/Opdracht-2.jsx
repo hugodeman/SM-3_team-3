@@ -14,19 +14,16 @@ function Opdracht_2() {
     const [feedback, setFeedback] = useState(null);
     const [weekData, setWeekData] = useState({});
 
-    const token = import.meta.env.VITE_BEARER_TOKEN;
-    const link = import.meta.env.VITE_GENERAL_LINK;
-
     useEffect(() => {
         fetchWord();
     }, []);
 
     function fetchWord() {
-        fetch(`${link}/words?lesson_id=${lessonId}`, {
+        fetch(`http://145.24.223.169/api/v1/words?lesson_id=${lessonId}`, {
             method: "GET",
             headers: {
                 "Accept": "application/json",
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
             },
         })
             .then(res => res.json())

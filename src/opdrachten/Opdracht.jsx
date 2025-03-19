@@ -14,9 +14,6 @@ function OpdrachtGebaren() {
     const [weekData, setWeekData] = useState({});
     const [options, setOptions] = useState([]);
 
-    const token = import.meta.env.VITE_BEARER_TOKEN;
-    const link = import.meta.env.VITE_GENERAL_LINK;
-
     const currentWord = words[currentIndex];
 
     useEffect(() => {
@@ -27,11 +24,11 @@ function OpdrachtGebaren() {
 
     async function fetchWords() {
         try {
-            const res = await fetch(`${link}/words?lesson_id=${lessonId}`, {
+            const res = await fetch(`http://145.24.223.169/api/v1/words?lesson_id=${lessonId}`, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
                 },
             });
 

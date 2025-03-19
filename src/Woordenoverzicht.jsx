@@ -3,9 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {useParams} from 'react-router-dom';
 import { useDarkMode } from './context/Darkmode.jsx';
 
-const link = import.meta.env.VITE_GENERAL_LINK;
-const token = import.meta.env.VITE_BEARER_TOKEN;
-
 function Woordenoverzicht() {
     const [activePopUp, setActivePopUp] = useState(null);
     const [words, setWords] = useState([]);
@@ -20,10 +17,10 @@ function Woordenoverzicht() {
     const {lessonId} = useParams();
 
     useEffect(() => {
-        fetch(`${link}/words?lesson_id=${lessonId}`, {
+        fetch(`http://145.24.223.169/api/v1/words?lesson_id=${lessonId}`, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
                 "Content-Type": "application/json"
             }
         })

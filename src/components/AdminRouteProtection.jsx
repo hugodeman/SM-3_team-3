@@ -5,8 +5,6 @@ function AdminRouteProtection({ children }) {
     const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
 
-    const bearerToken = import.meta.env.VITE_BEARER_TOKEN;
-
     useEffect(() => {
         async function fetchUsers() {
             try {
@@ -14,7 +12,7 @@ function AdminRouteProtection({ children }) {
                     method: "GET",
                     headers: {
                         "Accept": "application/json",
-                        "Authorization": `Bearer ${bearerToken}`,
+                        "Authorization": `Bearer 5|LVAIuyWxZqzKHNVw50jc2c6vCjk2NFBy4yxULA4m17c40042`,
                     },
                 });
 
