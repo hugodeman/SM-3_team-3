@@ -124,7 +124,8 @@ function ZinnenMaken() {
                     type="text"
                     value={sentence}
                     onChange={(e) => setSentence(e.target.value)}
-                    className="w-full max-w-2xl p-2 border border-customRed rounded-md shadow-sm focus:ring focus:ring-blue-300 mb-4"
+                    className={`w-full max-w-2xl p-2 border border-customRed rounded-md shadow-sm focus:ring focus:ring-blue-300 mb-4 
+                    ${darkMode ? 'text-black bg-gray-200' : 'text-black bg-white'}`}
                     placeholder="Typ hier je zin..."
                 />
 
