@@ -15,12 +15,25 @@ import OpdrachtGebaren from "./opdrachten/Opdracht.jsx";
 import Opdracht_2 from "./opdrachten/Opdracht-2.jsx";
 import ZinnenMaken from "./opdrachten/ZinnenMaken.jsx";
 import Progress from "./Progress.jsx";
+import AdminRouteProtection from "./components/AdminRouteProtection.jsx";
+import AdminPanel from "./AdminPanel.jsx";
 
 const router = createBrowserRouter([
     {
         element: <Layout />,
         children: [
-            { path: "/", element: <MainPage /> },
+            {
+                path: "/",
+                element: <MainPage />
+            },
+            {
+                path: "/admin",
+                element: (
+                    <AdminRouteProtection>
+                        <AdminPanel/>
+                    </AdminRouteProtection>
+                )
+            },
             {
                 path: "/vingerspel",
                 element: (

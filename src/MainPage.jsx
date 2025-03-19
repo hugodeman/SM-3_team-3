@@ -55,9 +55,9 @@ function MainPage() {
                     </a>
                 )}
 
-                {/* Admin Dashboard-knop */}
-                {user && user.is_admin && (
-                    <Link to="/admin-dashboard">
+                 {/*Admin Dashboard-knop */}
+                {user && user.role === 'admin' && (
+                    <Link to="/admin">
                         <button className="bg-blue-600 hover:bg-blue-700 text-white ml-5 px-6 py-3 rounded-lg transition">
                             Admin Dashboard
                         </button>
