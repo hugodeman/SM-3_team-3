@@ -3,6 +3,8 @@ import React from "react";
 import { useDarkMode } from '../context/Darkmode.jsx';
 import hrLogo from '../assets/Logo/HR-Logo-200px.png';
 
+// blablabla
+
 const HrLogo = () => {
     const { darkMode } = useDarkMode();
 
