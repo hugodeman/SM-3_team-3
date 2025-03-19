@@ -99,7 +99,7 @@ function OpdrachtGebaren() {
                     </>
                 ) : (
                     <>
-                        <p>Helaas! Het juiste antwoord is:</p>
+                        <p>Goed geprobeerd! Het juiste antwoord is:</p>
                         <strong className={`${darkMode ? "bg-backgroundDarkMode text-white" : "bg-white text-customRed"} text-xl`}>{correct}</strong>
                     </>
                 )}
